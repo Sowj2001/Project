@@ -124,7 +124,7 @@ const Login = () => {
 					</form>
 					<div className='mt-4 text-center'>
 						<p className='text-sm text-gray-600'>
-							Don't have an account?.........{" "}
+							Don't have an account?{" "}
 							<Link to='/register' className='font-bold text-blue-500'>
 								Sign Up
 							</Link>
@@ -132,7 +132,7 @@ const Login = () => {
 					</div>
 					<div className='flex justify-center items-center mt-6'>
 						<div className='w-1/3 h-px bg-gray-300'></div>
-						<div className='mx-3 text-sm text-gray-500'>or</div>
+						<div className='mx-3 text-sm text-gray-500'>And</div>
 						<div className='w-1/3 h-px bg-gray-300'></div>
 					</div>
 					<div className='flex justify-center items-center mt-6'>
