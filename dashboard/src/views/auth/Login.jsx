@@ -132,7 +132,7 @@ const Login = () => {
 					</div>
 					<div className='flex justify-center items-center mt-6'>
 						<div className='w-1/3 h-px bg-gray-300'></div>
-						<div className='mx-3 text-sm text-gray-500'>or</div>
+						<div className='mx-3 text-sm text-gray-500'>Or</div>
 						<div className='w-1/3 h-px bg-gray-300'></div>
 					</div>
 					<div className='flex justify-center items-center mt-6'>
