@@ -24,8 +24,8 @@ const publicRoutes = [
         element:<AdminLogin/>
     },
     {
-        path : '/unauthorized',
-        element : <UnAuthorized/>
+        path:'/unauthorized',
+        element:<UnAuthorized/>
     }
 
 
