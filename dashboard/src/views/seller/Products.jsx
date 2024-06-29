@@ -5,7 +5,7 @@ import Pagination from '../Pagination';
 import { FaEdit, FaEye, FaTrash } from 'react-icons/fa'; 
 
 const Products = () => {
-
+ 
     const [currentPage, setCurrentPage] = useState(1)
     const [searchValue, setSearchValue] = useState('')
     const [parPage, setParPage] = useState(5)
@@ -41,16 +41,16 @@ const Products = () => {
                 <td  className='py-1 px-4 font-medium whitespace-nowrap'>
                     <img className='w-[45px] h-[45px]' src={`http://localhost:3000/images/category/${d}.jpg`} alt="" />
                 </td>
-                <td  className='py-1 px-4 font-medium whitespace-nowrap'>Men Full Sleeve</td>
-                <td  className='py-1 px-4 font-medium whitespace-nowrap'>Tshirt</td>
-                <td className='py-1 px-4 font-medium whitespace-nowrap'>Veirdo </td>
-                <td className='py-1 px-4 font-medium whitespace-nowrap'>232</td>
-                <td className='py-1 px-4 font-medium whitespace-nowrap'>10%</td>
-                <td className='py-1 px-4 font-medium whitespace-nowrap'>20</td>
+                <td className='py-1 px-4 font-medium whitespace-nowrap'>Men Full Sleeve</td>
+                <td className='py-1 px-4 font-medium whitespace-nowrap'>Tshirt</td>
+                <td  className='py-1 px-4 font-medium whitespace-nowrap'>Veirdo </td>
+                <td  className='py-1 px-4 font-medium whitespace-nowrap'>$232</td>
+                <td  className='py-1 px-4 font-medium whitespace-nowrap'>10%</td>
+                <td  className='py-1 px-4 font-medium whitespace-nowrap'>20</td>
                  
                 <td  className='py-1 px-4 font-medium whitespace-nowrap'>
                     <div className='flex justify-start items-center gap-4'>
-                    <Link to={`/seller/dashboard/edit-product/1`} className='p-[6px] bg-yellow-500 rounded hover:shadow-lg hover:shadow-yellow-500/50'> <FaEdit/> </Link> 
+                    <Link to={`/seller/dashboard/edit-product/32`} className='p-[6px] bg-yellow-500 rounded hover:shadow-lg hover:shadow-yellow-500/50'> <FaEdit/> </Link> 
                     <Link className='p-[6px] bg-green-500 rounded hover:shadow-lg hover:shadow-green-500/50'> <FaEye/> </Link>
                     <Link className='p-[6px] bg-red-500 rounded hover:shadow-lg hover:shadow-red-500/50'> <FaTrash/> </Link> 
                     </div>
