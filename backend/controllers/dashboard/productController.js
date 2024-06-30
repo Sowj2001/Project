@@ -1,32 +1,36 @@
-const formidable = require("formidable")
-const { responseReturn } = require("../../utiles/response")
-const cloudinary = require('cloudinary').v2
-const productModel = require('../../models/productModel')
+const formidable = require("formidable");
+const { responseReturn } = require("../../utiles/response");
+const cloudinary = require('cloudinary').v2;
+const productModel = require('../../models/productModel');
 
-class productController{
+class productController {
+    add_product = async (req, res) => {
+        const { id } = req;
+        const form = formidable({ multiples: true });
 
-    add_product = async(req,res) => {
-        const {id} = req;
-        const form = formidable({ multiples: true })
+        form.parse(req, async (err, fields, files) => {
+            let { name, category, description, stock, price, discount, shopName, brand } = fields;
+            const { images } = files;
 
-        form.parse(req, async(err, field, files) => {
-            let {name, category,description, stock,price, discount,shopName,brand} = field;
-            const {images} = files;
-            name = name.trim()
-            const slug = name.split(' ').join('-')
+            name = name.trim();
+            const slug = name.split(' ').join('-');
 
             cloudinary.config({
                 cloud_name: process.env.cloud_name,
                 api_key: process.env.api_key,
                 api_secret: process.env.api_secret,
-                secure: true
-            })
+                secure: true,
+            });
 
             try {
                 let allImageUrl = [];
-                for (let i = 0; i < images.length; i++) {
-                    const result = await cloudinary.uploader.upload(images[i].filepath, {folder: 'products'});
-                    allImageUrl = [...allImageUrl, result.url] 
+
+                if (images) {
+                    const imageArray = Array.isArray(images) ? images : [images];
+                    for (let i = 0; i < imageArray.length; i++) {
+                        const result = await cloudinary.uploader.upload(imageArray[i].filepath, { folder: 'products' });
+                        allImageUrl.push(result.url);
+                    }
                 }
 
                 await productModel.create({
@@ -40,25 +44,40 @@ class productController{
                     price: parseInt(price),
                     discount: parseInt(discount),
                     images: allImageUrl,
-                    brand: brand.trim()  
-                })
-                responseReturn(res, 201,{ message : 'Product Added Successfully'})
-                
+                    brand: brand.trim(),
+                });
+
+                responseReturn(res, 201, { message: 'Product Added Successfully' });
             } catch (error) {
-                responseReturn(res, 500,{ error : error.message})
+                responseReturn(res, 500, { error: error.message });
             }
- 
-        })
-         
+        });
     }
 
-    /// end method 
+    products_get = async (req, res) => {
+        const { page, searchValue, parPage } = req.query;
+        const { id } = req;
 
+        const skipPage = parseInt(parPage) * (parseInt(page) - 1);
 
+        try {
+            const query = { sellerId: id };
+            if (searchValue) {
+                query.$text = { $search: searchValue };
+            }
 
+            const products = await productModel.find(query)
+                .skip(skipPage)
+                .limit(parseInt(parPage))
+                .sort({ createdAt: -1 });
 
+            const totalProduct = await productModel.countDocuments(query);
 
-
+            responseReturn(res, 200, { products, totalProduct });
+        } catch (error) {
+            responseReturn(res, 500, { error: error.message });
+        }
+    }
 }
 
-module.exports = new productController()
+module.exports = new productController();
