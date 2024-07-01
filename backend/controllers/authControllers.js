@@ -5,6 +5,7 @@ const bcrpty=require('bcrypt')
 const sellerModel =require('../models/sellerModel')
 const cloudinary = require('cloudinary').v2;
 const sellerCustomerModel =require('../models/chat/sellerCustomerModel')
+const formidable = require("formidable")
 
 class authControllers{
 
