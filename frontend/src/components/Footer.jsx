@@ -5,14 +5,14 @@ import { FaInfoCircle, FaShieldAlt, FaPhone } from "react-icons/fa";
 const Footer = () => {
 
     return (
-        <footer className='bg-slate-200 py-12'> {/* Changed bg-gray-100 to bg-green-500 */}
+        <footer className='bg-gray-500 py-12'> {/* Changed bg-gray-100 to bg-green-500 */}
             <div className='container mx-auto'>
                 <div className='flex flex-row justify-around'>
 
                     {/* Logo and Contact Section */}
                     <div className='flex flex-col items-center lg:items-start mb-8 lg:mb-0'>
                         <img className='w-48 h-16 mb-4' src="http://localhost:3000/images/logo.png" alt="logo" />
-                        <ul className='text-sm text-gray-600'>
+                        <ul className='text-sm text-gray-700'>
                             <li>Address: Udupi, Karnataka 574116</li>
                             <li>Phone: 7019115360</li>
                             <li>Email: bizcart4all@gmail.com</li>

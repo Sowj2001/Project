@@ -1,130 +1,135 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaFacebookF } from "react-icons/fa6";
-import { FaGoogle } from "react-icons/fa6"; 
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { customer_login,messageClear } from '../store/reducers/authReducer';
+import { customer_login, messageClear } from '../store/reducers/authReducer';
 import toast from 'react-hot-toast';
 import { FadeLoader } from 'react-spinners';
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Button,
+  Input,
+  Typography
+} from "@material-tailwind/react";
 
 const Login = () => {
-
-    const navigate = useNavigate()
-    const {loader,errorMessage,successMessage,userInfo } = useSelector(state => state.auth)
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const { loader, errorMessage, successMessage, userInfo } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
     const [state, setState] = useState({ 
         email: '',
         password: ''
-    })
+    });
 
     const inputHandle = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
-        })
-    }
+        });
+    };
  
     const login = (e) => {
-        e.preventDefault()
-        dispatch(customer_login(state))
-    }
+        e.preventDefault();
+        dispatch(customer_login(state));
+    };
 
     useEffect(() => { 
         if (successMessage) {
-            toast.success(successMessage)
-            dispatch(messageClear())  
+            toast.success(successMessage);
+            dispatch(messageClear());  
         } 
         if (errorMessage) {
-            toast.error(errorMessage)
-            dispatch(messageClear())  
+            toast.error(errorMessage);
+            dispatch(messageClear());  
         } 
         if (userInfo) {
-            navigate('/')
+            navigate('/');
         }
-    },[successMessage,errorMessage])
-
+    }, [successMessage, errorMessage, userInfo, navigate, dispatch]);
 
     return (
-        <div>
-             {
-                loader && <div className='w-screen h-screen flex justify-center items-center fixed left-0 top-0 bg-[#38303033] z-[999]'>
-                    <FadeLoader/>
+        <div className='min-h-screen flex flex-col'>
+            {loader && (
+                <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-300 bg-opacity-50'>
+                    <FadeLoader />
                 </div>
-            }
-            <Header/>
-    <div className='bg-slate-200 mt-4'>
-        <div className='w-full justify-center items-center p-10'>
-            <div className='grid grid-cols-2 w-[60%] mx-auto bg-white rounded-md'>
-                <div className='px-8 py-8'>
-            <h2 className='text-center w-full text-xl text-slate-600 font-bold'>Login </h2> 
-
-    <div>
-        <form onSubmit={login} className='text-slate-600'>
-    
-
-    <div className='flex flex-col gap-1 mb-2'>
-        <label htmlFor="email">Email</label>
-        <input onChange={inputHandle} value={state.email}  className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md' type="email" name="email" id="email" placeholder='Email' required />
-    </div>
-
-
-    <div className='flex flex-col gap-1 mb-2'>
-        <label htmlFor="password">Password</label>
-        <input onChange={inputHandle} value={state.password}  className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md' type="password" name="password" id="password" placeholder='Password' required />
-    </div>
-
-    <button className='px-8 w-full py-2 bg-[#059473] shadow-lg hover:shadow-green-500/40 text-white rounded-md'>Login</button>
- 
-        </form>
-    <div className='flex justify-center items-center py-2'>
-        <div className='h-[1px] bg-slate-300 w-[95%]'> </div>
-        <span className='px-3 text-slate-600'>Or</span>
-        <div className='h-[1px] bg-slate-300 w-[95%]'> </div>
-    </div>
-
-    <button className='px-8 w-full py-2 bg-indigo-500 shadow hover:shadow-indigo-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-        <span><FaFacebookF /> </span>
-        <span>Login With Facebook </span>
-    </button>
-
-    <button className='px-8 w-full py-2 bg-red-500 shadow hover:shadow-red-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-        <span><FaGoogle  /></span>
-        <span>Login With Google </span>
-    </button> 
-    </div>    
-
-    <div className='text-center text-slate-600 pt-1'>
-        <p>Don't Have An Account ? <Link className='text-blue-500' to='/register'> Register</Link> </p>
-    </div> 
-
-     <a target='_blank' href="http://localhost:3001/login">
-     <div className='px-8 w-full py-2 bg-[#02e3e0] shadow hover:shadow-red-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-            Login As a Seller
-     </div>
-     </a>
- 
-     <a target='_blank' href="http://localhost:3001/register">
-     <div className='px-8 w-full py-2 bg-[#ad2cc4] shadow hover:shadow-red-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-            Register As a Seller
-     </div>
-     </a>
-
-
-
-            </div> 
-
-        <div className='w-full h-full py-4 pr-4'>
-            <img src="http://localhost:3000/images/login.jpg" alt="" />
-         </div>    
-
-         </div>
-        </div>
-    </div>        
-            
-            <Footer/>
+            )}
+            <Header />
+            <div className='flex-1 flex justify-center items-center m-3 bg-gray-100 py-8'>
+                <div className='flex w-full max-w-6xl mx-4'>
+                    <div className='w-full md:w-1/2 bg-cover bg-center rounded-l-lg'
+                     style={{ backgroundImage: "url('https://static.vecteezy.com/system/resources/previews/001/991/652/non_2x/sign-in-page-flat-design-concept-illustration-icon-account-login-user-login-abstract-metaphor-can-use-for-landing-page-mobile-app-ui-posters-banners-free-vector.jpg')" }}>
+                    </div>
+                    <div className='w-full md:w-1/2 bg-white rounded-r-lg  flex flex-col justify-center p-6 md:p-8'>
+                    
+                        <Card className='w-full max-w-sm mx-auto'>
+                       
+                            <CardBody>
+                            <h2 className='text-xl text-gray-700 font-bold mb-4'>Login📝</h2>
+                                <form onSubmit={login} className='text-slate-600'>
+                                    <div className='mb-4'>
+                                        <Input 
+                                            onChange={inputHandle}
+                                            value={state.email}
+                                            type='email'
+                                            name='email'
+                                            label='Email'
+                                            placeholder='Email'
+                                            size='md'
+                                            required
+                                            color='lightBlue'
+                                            outline={false}
+                                        />
+                                    </div>
+                                    <div className='mb-4'>
+                                        <Input 
+                                            onChange={inputHandle}
+                                            value={state.password}
+                                            type='password'
+                                            name='password'
+                                            label='Password'
+                                            placeholder='Password'
+                                            size='md'
+                                            required
+                                            color='lightBlue'
+                                            outline={false}
+                                        />
+                                    </div>
+                                    <Button
+                                        type='submit'
+                                        fullWidth
+                                        color='green'
+                                        className='mb-4'
+                                    >
+                                        Login
+                                    </Button>
+                                </form>
+                                <div className='text-center mb-4'>
+                                    <Link to='/forgot-password' className='text-blue-500'>Forgot Password?</Link>
+                                </div>
+                                <div className='text-center'>
+                                    <Typography variant="small" className="text-gray-600">
+                                        Don't Have An Account? <Link className='text-blue-500' to='/register'>Register</Link>
+                                    </Typography>
+                                </div>
+                            </CardBody>
+                            <CardFooter className='flex flex-col items-center gap-2'>
+                                <a target='_blank' rel='noopener noreferrer' href="http://localhost:3001/login">
+                                    <Button color='teal' className='w-full'>Login As a Seller</Button>
+                                </a>
+                                <a target='_blank' rel='noopener noreferrer' href="http://localhost:3001/register">
+                                    <Button color='purple' className='w-full'>Register As a Seller</Button>
+                                </a>
+                            </CardFooter>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+            <Footer />
         </div>
     );
 };
