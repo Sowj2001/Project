@@ -109,7 +109,7 @@ const Header = () => {
                                         <Link to='/vendors' className={`p-2 block ${pathname === '/vendors' ? 'text-[#059473]' : 'text-slate-600'}`}>Vendors</Link>
                                     </li>
                                     <li>
-                                        <Link to='/shops' className={`p-2 block ${pathname === '/vendors' ? 'text-[#059473]' : 'text-slate-600'}`}>shop</Link>
+                                        <Link to='/shops' className={`p-2 block ${pathname === '/shops' ? 'text-[#059473]' : 'text-slate-600'}`}>shop</Link>
                                     </li>
                                     <li>
                                             <Link 
