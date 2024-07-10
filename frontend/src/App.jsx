@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import Vendors from './pages/Vendors';
 import Shops from './pages/Shops';
 import Card from './pages/Card';
 import Shipping from './pages/Shipping';
@@ -25,6 +26,7 @@ import Chat from './components/dashboard/Chat';
 import ConfirmOrder from './pages/ConfirmOrder';
 import AboutUs from './pages/AboutUs';
 
+
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -37,6 +39,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/about' element={<AboutUs/>}></Route>
+      <Route path='/vendors' element={<Vendors/>}></Route>
+      
     
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />

@@ -85,11 +85,11 @@ const Index = () => {
         <tbody>
             {
                 recentOrders.map((o,i) => <tr className='bg-white border-b'>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>#{o._id}</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>${o.price}</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.payment_status }</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.delivery_status}</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>#{o._id}</td>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>₹{o.price}</td>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>{o.payment_status }</td>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>{o.delivery_status}</td>
+                <td className='px-6 py-4 font-medium whitespace-nowrap'>
                     <Link to={`/dashboard/order/details/${o._id}`}><span className='bg-green-200 text-green-800 text-md font-semibold mr-2 px-3 py-[2px] rounded'>View</span></Link>
 
                     {

@@ -7,60 +7,44 @@ import Products from '../components/products/Products';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_products } from '../store/reducers/homeReducer';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-
 
 const Home = () => {
     const dispatch = useDispatch();
     const { products, latest_product, topRated_product, discount_product } = useSelector(state => state.home);
 
-    useEffect(() => {
+    useEffect(() => { 
         dispatch(get_products());
     }, [dispatch]);
 
+    const backgroundImageStyle = {
+        backgroundImage: 'url("https://styledme.com/wp-content/uploads/2021/01/blue-sky-plain-zoom-background-simple-minimalist-virtual-calls-backdrop.jpg")',
+    };
+
     return (
-        <div className='w-full'>
+        <div>
             <Header />
-            <div className='relative'>
-                <Banner className="h-[150px] md:h-[200px] sm:h-[150px] object-cover" />
-                <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center'>
-                    <h1 className='text-4xl sm:text-3xl text-white font-bold mb-4'>Welcome to BizCart4All</h1>
-                    <p className='text-lg text-white'>Discover a world of amazing products</p>
-                </div>
-            </div>
-            <div className='bg-white py-8'>
-                <div className='max-w-6xl mx-auto'>
+            <div className="relative m-4 w-full bg-cover bg-center" style={backgroundImageStyle}>
+                <div className="absolute inset-0"></div> {/* Add overlay */}
+                <div className="relative z-10">
+                    <Banner />
                     <Categorys />
-                </div>
-            </div>
-            <div className='bg-gray-50 py-8'>
-                <div className='max-w-6xl mx-auto'>
-                    <FeatureProducts products={products} />
-                </div>
-            </div>
-            <div className='bg-white py-12'>
-                <div className='max-w-6xl mx-auto'>
-                    <div className='grid  md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                        <Card>
-                            <CardHeader title='Latest Products' />
-                            <CardContent>
-                                <Products products={latest_product} />
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader title='Top Rated Products' />
-                            <CardContent>
-                                <Products products={topRated_product} />
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader title='Discounted Products' />
-                            <CardContent >
-                                <Products products={discount_product} />
-                            </CardContent>
-                        </Card>
+                    <div className='py-[45px]'>
+                        <FeatureProducts products={products} />
+                    </div>
+                    <div className='py-10'>
+                        <div className='w-[85%] flex flex-wrap mx-auto'>
+                            <div className='grid w-full grid-cols-3 md-lg:grid-cols-2 md:grid-cols-1 gap-7'>
+                                <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
+                                    <Products title='Latest Product' products={latest_product} />
+                                </div>
+                                <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
+                                    <Products title='Top Rated Product' products={topRated_product} />
+                                </div>
+                                <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
+                                    <Products title='Discount Product' products={discount_product} />
+                                </div>
+                            </div> 
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -70,4 +54,3 @@ const Home = () => {
 };
 
 export default Home;
-

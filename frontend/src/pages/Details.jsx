@@ -242,10 +242,10 @@ const Details = () => {
          <div className='text-2xl text-red-500 font-bold flex gap-3'>
             {
                 product.discount !== 0 ? <>
-                Price : <h2 className='line-through'>${product.price}</h2>
-                <h2>${product.price - Math.floor((product.price * product.discount) / 100)} (-{product.discount}%) </h2>
+                Price : <h2 className='line-through'>₹{product.price}</h2>
+                <h2>₹{product.price - Math.floor((product.price * product.discount) / 100)} (-{product.discount}%) </h2>
                 
-                </> : <h2> Price : ${product.price} </h2>
+                </> : <h2> Price : ₹{product.price} </h2>
             }
           </div> 
 
@@ -295,12 +295,7 @@ const Details = () => {
         <li>
             <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-cyan-500 rounded-full text-white' href="#"> <FaTwitter /> </a>
         </li>
-        <li>
-            <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-purple-500 rounded-full text-white' href="#"> <FaLinkedin /> </a>
-        </li>
-        <li>
-            <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-blue-500 rounded-full text-white' href="#"> <FaGithub /> </a>
-        </li>
+       
     </ul> 
 
             </div>
@@ -363,7 +358,7 @@ const Details = () => {
 
             <h2 className='text-slate-600 py-1 font-bold'>{p.name} </h2>
             <div className='flex gap-2'>
-                <h2 className='text-lg font-bold text-slate-600'>${p.price}</h2>
+                <h2 className='text-lg font-bold text-slate-600'>₹{p.price}</h2>
                 <div className='flex items-center gap-2'>
                     <Rating ratings={p.rating}  />
                 </div>
@@ -428,7 +423,7 @@ const Details = () => {
             <div className='p-4 flex flex-col gap-1'>
             <h2 className='text-slate-600 text-lg font-bold'>{p.name} </h2>
             <div className='flex justify-start items-center gap-3'>
-                <h2 className='text-lg font-bold text-slate-600'>${p.price}</h2>
+                <h2 className='text-lg font-bold text-slate-600'>₹{p.price}</h2>
                 <div className='flex'>
                     <Rating ratings={p.rating}  />
                 </div>
