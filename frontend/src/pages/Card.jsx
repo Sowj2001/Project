@@ -106,7 +106,7 @@ const Card = () => {
    <div className='flex justify-between w-5/12 sm:w-full sm:mt-3'>
        <div className='pl-4 sm:pl-0'>
            <h2 className='text-lg text-orange-500'>${pt.productInfo.price - Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)}</h2>
-           <p className='line-through'>${pt.productInfo.price}</p>
+           <p className='line-through'>₹{pt.productInfo.price}</p>
            <p>-{pt.productInfo.discount}%</p>
        </div>
        <div className='flex gap-2 flex-col'>
@@ -148,7 +148,7 @@ const Card = () => {
    <div className='flex justify-between w-5/12 sm:w-full sm:mt-3'>
        <div className='pl-4 sm:pl-0'>
            <h2 className='text-lg text-orange-500'>${p.products[0].price - Math.floor((p.products[0].price * p.products[0].discount) / 100 )}</h2>
-           <p className='line-through'>${p.products[0].price}</p>
+           <p className='line-through'>₹{p.products[0].price}</p>
            <p>-{p.products[0].discount}%</p>
        </div>
        <div className='flex gap-2 flex-col'>
@@ -180,11 +180,11 @@ const Card = () => {
                 <h2 className='text-xl font-bold'>Order Summary</h2>
                 <div className='flex justify-between items-center'>
                     <span>{buy_product_item} Items </span>
-                    <span>${price} </span>
+                    <span>₹{price} </span>
                 </div>
                 <div className='flex justify-between items-center'>
                     <span>Shipping Fee </span>
-                    <span>${shipping_fee} </span>
+                    <span>₹{shipping_fee} </span>
                 </div>
                 <div className='flex gap-2'>
                 <input className='w-full px-3 py-2 border border-slate-200 outline-0 focus:border-green-500 rounded-sm' type="text" placeholder='Input Vauchar Coupon' />

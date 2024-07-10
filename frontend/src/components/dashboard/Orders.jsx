@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { get_orders } from '../../store/reducers/orderReducer';
 
 const Orders = () => {
@@ -14,7 +14,7 @@ const Orders = () => {
 
     useEffect(() => {
         dispatch(get_orders({status:state, customerId:userInfo.id}))
-    },[state])
+    },[state, dispatch])
 
     const redirect = (ord) => {
         let items = 0;
@@ -59,11 +59,11 @@ const Orders = () => {
         <tbody>
         {
                 myOrders.map((o,i) => <tr className='bg-white border-b'>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>#{o._id}</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>${o.price}</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.payment_status }</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.delivery_status}</td>
-                <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>
+                <td className='px-6 py-4 font-medium whitespace-nowrap'>#{o._id}</td>
+                <td className='px-6 py-4 font-medium whitespace-nowrap'>₹{o.price}</td>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>{o.payment_status }</td>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>{o.delivery_status}</td>
+                <td  className='px-6 py-4 font-medium whitespace-nowrap'>
                     <Link to={`/dashboard/order/details/${o._id}`}><span className='bg-green-200 text-green-800 text-md font-semibold mr-2 px-3 py-[2px] rounded'>View</span></Link>
 
                     {

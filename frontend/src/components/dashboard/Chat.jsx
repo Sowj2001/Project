@@ -33,7 +33,7 @@ const Chat = () => {
             sellerId: sellerId || "",
             userId: userInfo.id
         }))
-    },[sellerId])
+    },[sellerId,dispatch])
 
     const send = () => {
         if (text) {
