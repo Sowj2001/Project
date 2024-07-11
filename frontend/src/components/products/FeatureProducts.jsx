@@ -40,16 +40,20 @@ const FeatureProducts = ({products}) => {
 
 
     const add_wishlist = (pro) => {
-        dispatch(add_to_wishlist({
-            userId: userInfo.id,
-            productId: pro._id,
-            name: pro.name,
-            price: pro.price,
-            image: pro.images[0],
-            discount: pro.discount,
-            rating: pro.rating,
-            slug: pro.slug
-        }))
+        if (userInfo) {
+            dispatch(add_to_wishlist({
+                userId: userInfo.id,
+                productId: pro._id,
+                name: pro.name,
+                price: pro.price,
+                image: pro.images[0],
+                discount: pro.discount,
+                rating: pro.rating,
+                slug: pro.slug
+            }))
+         } else {
+             navigate('/login')
+         }
     }
 
 
