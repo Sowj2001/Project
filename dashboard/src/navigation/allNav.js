@@ -6,7 +6,7 @@ import { FaCodePullRequest } from "react-icons/fa6";
 import { IoIosChatbubbles } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 import { MdViewList } from "react-icons/md";
-import { TbBasketDiscount } from "react-icons/tb";
+// import { TbBasketDiscount } from "react-icons/tb";
 import { BsCartCheck } from "react-icons/bs"; 
 import { IoChatbubbles } from "react-icons/io5";
 import { BsFillChatQuoteFill } from "react-icons/bs";

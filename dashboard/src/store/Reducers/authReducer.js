@@ -225,6 +225,15 @@ export const authReducer = createSlice({
             state.userInfo = payload.userInfo
             state.successMessage = payload.message
         })
+        .addCase(logout.fulfilled, (state, { payload }) => {
+            state.token = null;
+            state.role = '';
+            state.userInfo = '';
+            state.successMessage = payload.message;
+        })
+        .addCase(logout.rejected, (state, { payload }) => {
+            state.errorMessage = payload.error;
+        });
 
     }
 

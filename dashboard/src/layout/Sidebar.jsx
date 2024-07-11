@@ -3,12 +3,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getNav } from "../navigation/index";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/Reducers/authReducer";
+import { logout,messageClear } from "../store/Reducers/authReducer";
 import logo from "../assets/logo.png";
+// import toast from 'react-hot-toast';
+
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const dispatch = useDispatch();
-	const { role } = useSelector((state) => state.auth);
+	const { role,errorMessage,successMessage } = useSelector((state) => state.auth);
 	const navigate = useNavigate();
 
 	const { pathname } = useLocation();
@@ -18,6 +20,19 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 		setAllNav(navs);
 	}, [role]);
 	// console.log(allNav)
+
+
+	// useEffect(() => {
+    //     if (errorMessage) {
+    //         toast.error(errorMessage)
+    //         dispatch(messageClear())
+    //     }
+    //     if (successMessage) {
+    //         toast.success(successMessage)
+    //         dispatch(messageClear())  
+    //         // navigate('/')          
+    //     }
+    // },[errorMessage,successMessage])
 
 	return (
 		<div>
