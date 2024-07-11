@@ -17,11 +17,17 @@ const Register = () => {
         password: ""
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+
     const inputHandle = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
         });
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     const submit = (e) => {
@@ -43,7 +49,7 @@ const Register = () => {
 
     return (
         <div className='min-w-screen min-h-screen flex items-center justify-center bg-cover bg-center'
-         style={{ backgroundImage: 'url(https://www.alll.com/wp-content/uploads/2019/01/signup-background2-768x432.jpg)' }}>
+            style={{ backgroundImage: 'url(https://www.alll.com/wp-content/uploads/2019/01/signup-background2-768x432.jpg)' }}>
             <div className='bg-white bg-opacity-90 rounded-lg shadow-lg flex flex-col md:flex-row md:max-w-4xl w-full'>
                 <div className='md:w-1/2 p-6 flex flex-col justify-center'>
                     <h2 className='text-2xl font-bold mb-2 text-[#333]'>Welcome to BizCart4All</h2>
@@ -57,9 +63,12 @@ const Register = () => {
                             <label htmlFor="email" className='mb-1 text-[#555]'>Email</label>
                             <input onChange={inputHandle} value={state.email} className='px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' type="email" name='email' placeholder='Email' id='email' required />
                         </div>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col relative'>
                             <label htmlFor="password" className='mb-1 text-[#555]'>Password</label>
-                            <input onChange={inputHandle} value={state.password} className='px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' type="password" name='password' placeholder='Password' id='password' required />
+                            <input onChange={inputHandle} value={state.password} className='px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' type={showPassword ? 'text' : 'password'} name='password' placeholder='Password' id='password' required />
+                            <button type="button" onClick={togglePasswordVisibility} className='absolute right-3 top-9 text-black'>
+                                {showPassword ? '🙈' : '👁️'}
+                            </button>
                         </div>
                         <div className='flex items-center'>
                             <input className='w-4 h-4 text-indigo-600 bg-gray-100 rounded border-gray-300 focus:ring-indigo-500' type="checkbox" name="checkbox" id="checkbox" />

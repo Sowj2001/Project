@@ -22,7 +22,8 @@ const Login = () => {
 
     const [state, setState] = useState({ 
         email: '',
-        password: ''
+        password: '',
+        showPassword: false // State to toggle password visibility
     });
 
     const inputHandle = (e) => {
@@ -31,7 +32,14 @@ const Login = () => {
             [e.target.name]: e.target.value
         });
     };
- 
+
+    const togglePasswordVisibility = () => {
+        setState({
+            ...state,
+            showPassword: !state.showPassword
+        });
+    };
+
     const login = (e) => {
         e.preventDefault();
         dispatch(customer_login(state));
@@ -67,9 +75,8 @@ const Login = () => {
                     <div className='w-full md:w-1/2 bg-white rounded-r-lg  flex flex-col justify-center p-6 md:p-8'>
                     
                         <Card className='w-full max-w-sm mx-auto'>
-                       
                             <CardBody>
-                            <h2 className='text-xl text-gray-700 font-bold mb-4'>Login📝</h2>
+                                <h2 className='text-xl text-gray-700 font-bold mb-4'>Login📝</h2>
                                 <form onSubmit={login} className='text-slate-600'>
                                     <div className='mb-4'>
                                         <Input 
@@ -85,11 +92,11 @@ const Login = () => {
                                             outline={false}
                                         />
                                     </div>
-                                    <div className='mb-4'>
+                                    <div className='mb-4 relative'>
                                         <Input 
                                             onChange={inputHandle}
                                             value={state.password}
-                                            type='password'
+                                            type={state.showPassword ? 'text' : 'password'} // Toggle password visibility
                                             name='password'
                                             label='Password'
                                             placeholder='Password'
@@ -98,6 +105,13 @@ const Login = () => {
                                             color='lightBlue'
                                             outline={false}
                                         />
+                                        <button
+                                            type="button"
+                                            onClick={togglePasswordVisibility}
+                                            className='absolute right-3 top-2 text-gray-400 focus:outline-none'
+                                        >
+                                           {state.showPassword ? '🙈' : '👁️'}
+                                        </button>
                                     </div>
                                     <Button
                                         type='submit'

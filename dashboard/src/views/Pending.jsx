@@ -1,9 +1,10 @@
 import React from 'react';
 
+
 const Pending = () => {
     return (
         <div>
-            pending
+           <h1>Please update your Profile.........</h1> 
         </div>
     );
 };

@@ -119,26 +119,31 @@ export const profile_info_add = createAsyncThunk(
 
     // end Method 
 
-    export const logout = createAsyncThunk(
-        'auth/logout',
-        async({navigate,role},{rejectWithValue, fulfillWithValue}) => {
-             
-            try {
-                const {data} = await api.get('/logout', {withCredentials: true}) 
-                localStorage.removeItem('accessToken') 
-                if (role === 'admin') {
-                    navigate('/admin/login')
-                } else {
-                    navigate('/login')
-                }
-                return fulfillWithValue(data)
-            } catch (error) {
-                // console.log(error.response.data)
-                return rejectWithValue(error.response.data)
-            }
-        }
-    )
+    let logoutCalled = false;
 
+export const logout = createAsyncThunk(
+    'auth/logout',
+    async ({ navigate, role }, { rejectWithValue, fulfillWithValue }) => {
+        if (logoutCalled) return;
+        logoutCalled = true;
+
+        try {
+            const { data } = await api.get('/logout', { withCredentials: true });
+            localStorage.removeItem('accessToken');
+            if (role === 'admin') {
+                navigate('/admin/login');
+            } else {
+                navigate('/login');
+            }
+            return fulfillWithValue(data);
+        } catch (error) {
+            console.error('Logout error:', error.response.data);
+            return rejectWithValue(error.response.data);
+        } finally {
+            logoutCalled = false;
+        }
+    }
+);
         // end Method 
 
  
@@ -225,14 +230,24 @@ export const authReducer = createSlice({
             state.userInfo = payload.userInfo
             state.successMessage = payload.message
         })
-        .addCase(logout.fulfilled, (state, { payload }) => {
-            state.token = null;
+        // .addCase(logout.fulfilled, (state, { payload }) => {
+        //     state.token = null;
+        //     state.role = '';
+        //     state.userInfo = '';
+        //     state.successMessage = payload.message;
+        // })
+        // .addCase(logout.rejected, (state, { payload }) => {
+        //     state.errorMessage = payload.error;
+        // })
+
+        .addCase(logout.fulfilled, (state) => {
             state.role = '';
-            state.userInfo = '';
-            state.successMessage = payload.message;
+            
+           
         })
-        .addCase(logout.rejected, (state, { payload }) => {
-            state.errorMessage = payload.error;
+        .addCase(logout.rejected, (state, action) => {
+            console.error('Logout rejected:', action.payload);
+            // handle state changes on logout failure
         });
 
     }
