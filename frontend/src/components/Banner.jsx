@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
-import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_banners } from '../store/reducers/homeReducer';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
     const dispatch = useDispatch();
     const { banners } = useSelector(state => state.home);
+
+    useEffect(() => {
+        dispatch(get_banners());
+    }, [dispatch]);
 
     const responsive = {
         superLargeDesktop: {
@@ -28,38 +32,36 @@ const Banner = () => {
         },
     };
 
-    useEffect(() => {
-        dispatch(get_banners());
-    }, [dispatch]);
-
     return (
-        <div className='w-full md-lg:mt-6'>
-            <div className='w-[85%] lg:w-[90%] mx-auto'>
-                <div className='w-full flex flex-wrap md-lg:gap-8'>
-                    <div className='w-full'>
-                        <div className='my-8'>
-                            <Carousel
-                                autoPlay={true}
-                                infinite={true}
-                                arrows={true}
-                                showDots={true}
-                                responsive={responsive}
-                                containerClass="carousel-container"
-                            >
-                                {banners.length > 0 && banners.map((b, i) => (
-                                    <Link key={i} to={`product/details/${b.link}`}>
-                                        <div className="h-64 md:h-80 lg:h-96 w-full flex justify-center items-center">
-                                            <img
-                                                src={b.banner}
-                                                alt=""
-                                                className="object-contain h-full w-full"
-                                            />
-                                        </div>
-                                    </Link>
-                                ))}
-                            </Carousel>
-                        </div>
-                    </div>
+        <div className='w-full'>
+            <div className='w-11/12 md:w-full mx-auto'>
+                <div className='w-full'>
+                    <Carousel
+                        autoPlay={true}
+                        infinite={true}
+                        arrows={true}
+                        showDots={true}
+                        responsive={responsive}
+                        containerClass="carousel-container"
+                        itemClass="carousel-item"
+                    >
+                        {banners.length > 0 && banners.map((banner, index) => (
+                            <Link key={index} to={`product/details/${banner.link}`}>
+                                <div className="mt-5 h-72 md:h-96 lg:h-150 relative overflow-hidden">
+                                    <img
+                                        src={banner.banner}
+                                        alt=""
+                                        className="object-cover h-full w-full transition duration-500 transform hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                        <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+                                            {banner.title}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </Carousel>
                 </div>
             </div>
         </div>
