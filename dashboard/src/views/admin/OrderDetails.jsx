@@ -43,10 +43,10 @@ const OrderDetails = () => {
             <div className='flex justify-between items-center p-4'>
                 <h2 className='text-xl text-[#d0d2d6]'>Order Details</h2>
                 <select onChange={status_update} value={status} name="" id="" className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#475569] border border-slate-700 rounded-md text-[#d0d2d6]'>
-                <option value="pending">pending</option>
-                <option value="processing">processing</option>
                 <option value="warehouse">warehouse</option>
-                <option value="placed">placed</option>
+                <option value="processing">processing</option>
+                <option value="placed">shipped</option>
+                <option value="pending">successful</option>
                 <option value="cancelled">cancelled</option>
                 </select> 
             </div>
@@ -72,7 +72,7 @@ const OrderDetails = () => {
                 <h2>Payment Status: </h2>
                 <span className='text-base'>{order.payment_status}</span>
              </div>  
-             <span>Price : ${order.price}</span> 
+             <span>Price : ₹{order.price}</span> 
 
             <div className='mt-4 flex flex-col gap-4 bg-[#8288ed] rounded-md'>
                 <div className='text-[#d0d2d6]'>

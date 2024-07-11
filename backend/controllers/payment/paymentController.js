@@ -9,7 +9,7 @@ const { responseReturn } = require("../../utiles/response");
 const {
 	mongo: { ObjectId },
 } = require("mongoose");
-// const stripe = require('stripe')('sk_test_51Oml5cGAwoXiNtjJZbPFBKav0pyrR8GSwzUaLHLhInsyeCa4HI8kKf2IcNeUXc8jc8XVzBJyqjKnDLX9MlRjohrL003UDGPZgQ')
+const stripe = require('stripe')('sk_test_51Oml5cGAwoXiNtjJZbPFBKav0pyrR8GSwzUaLHLhInsyeCa4HI8kKf2IcNeUXc8jc8XVzBJyqjKnDLX9MlRjohrL003UDGPZgQ')
 // const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 class paymentController {

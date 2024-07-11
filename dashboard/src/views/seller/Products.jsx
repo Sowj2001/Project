@@ -62,7 +62,7 @@ const Products = () => {
                 <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>{ d?.name?.slice(0,15)}...</td>
                 <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>{ d.category }</td>
                 <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>{d.brand} </td>
-                <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>${d.price}</td>
+                <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>₹{d.price}</td>
                 <td scope='row' className='py-1 px-4 font-medium whitespace-nowrap'>
                     {
                         d.discount === 0 ? <span>No Discount</span> : 

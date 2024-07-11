@@ -105,7 +105,7 @@ const Card = () => {
 
    <div className='flex justify-between w-5/12 sm:w-full sm:mt-3'>
        <div className='pl-4 sm:pl-0'>
-           <h2 className='text-lg text-orange-500'>${pt.productInfo.price - Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)}</h2>
+           <h2 className='text-lg text-orange-500'>₹{pt.productInfo.price - Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)}</h2>
            <p className='line-through'>₹{pt.productInfo.price}</p>
            <p>-{pt.productInfo.discount}%</p>
        </div>
@@ -147,7 +147,7 @@ const Card = () => {
 
    <div className='flex justify-between w-5/12 sm:w-full sm:mt-3'>
        <div className='pl-4 sm:pl-0'>
-           <h2 className='text-lg text-orange-500'>${p.products[0].price - Math.floor((p.products[0].price * p.products[0].discount) / 100 )}</h2>
+           <h2 className='text-lg text-orange-500'>₹{p.products[0].price - Math.floor((p.products[0].price * p.products[0].discount) / 100 )}</h2>
            <p className='line-through'>₹{p.products[0].price}</p>
            <p>-{p.products[0].discount}%</p>
        </div>
@@ -186,14 +186,14 @@ const Card = () => {
                     <span>Shipping Fee </span>
                     <span>₹{shipping_fee} </span>
                 </div>
-                <div className='flex gap-2'>
+                {/* <div className='flex gap-2'>
                 <input className='w-full px-3 py-2 border border-slate-200 outline-0 focus:border-green-500 rounded-sm' type="text" placeholder='Input Vauchar Coupon' />
                 <button className='px-5 py-[1px] bg-[#059473] text-white rounded-sm uppercase text-sm'>Apply</button>
-                </div>
+                </div> */}
 
                 <div className='flex justify-between items-center'>
                     <span>Total</span>
-                    <span className='text-lg text-[#059473]'>${price + shipping_fee} </span>
+                    <span className='text-lg text-[#059473]'>₹{price + shipping_fee} </span>
                 </div>
                 <button onClick={redirect} className='px-5 py-[6px] rounded-sm hover:shadow-red-500/50 hover:shadow-lg bg-red-500 text-sm text-white uppercase '>
                     Process to Checkout ({buy_product_item})

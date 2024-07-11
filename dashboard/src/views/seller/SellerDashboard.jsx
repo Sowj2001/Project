@@ -94,7 +94,7 @@ const SellerDashboard = () => {
                 
                 <div className='flex justify-between items-center p-5 bg-[#fae8e8] rounded-md gap-3'>
                     <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
-                        <h2 className='text-3xl font-bold'>${totalSale}</h2>
+                        <h2 className='text-3xl font-bold'>₹{totalSale}</h2>
                         <span className='text-md font-medium'>Total Salse</span>
                     </div>
 
@@ -214,7 +214,7 @@ const SellerDashboard = () => {
             {
                 recentOrder.map((d, i) => <tr key={i}>
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>#{d._id}</td>
-                <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>${d.price}</td>
+                <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>₹{d.price}</td>
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{d.payment_status}</td>
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>{d.delivery_status}</td>
                 <td scope='row' className='py-3 px-4 font-medium whitespace-nowrap'>

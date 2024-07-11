@@ -182,7 +182,7 @@ const Profile = () => {
 
 
 
-    <div className='w-full md:w-6/12'>
+    {/* <div className='w-full md:w-6/12'>
         <div className='w-full pl-0 md:pl-7 mt-6 md:mt-0'>
         <div className='bg-[#6a5fdf] rounded-md text-[#d0d2d6] p-4'>
         <h1 className='text-[#d0d2d6] text-lg mb-3 font-semibold'>Change Password</h1>
@@ -211,7 +211,7 @@ const Profile = () => {
         
         </div>
 
-    </div>
+    </div> */}
 
 
 
