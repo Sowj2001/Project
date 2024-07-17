@@ -9,8 +9,8 @@ const { responseReturn } = require("../../utiles/response");
 const {
 	mongo: { ObjectId },
 } = require("mongoose");
-const stripe = require('stripe')('sk_test_51Oml5cGAwoXiNtjJZbPFBKav0pyrR8GSwzUaLHLhInsyeCa4HI8kKf2IcNeUXc8jc8XVzBJyqjKnDLX9MlRjohrL003UDGPZgQ')
-// const stripe = require("stripe")(process.env.STRIPE_API_KEY);
+// const stripe = require('stripe')('sk_test_51Oml5cGAwoXiNtjJZbPFBKav0pyrR8GSwzUaLHLhInsyeCa4HI8kKf2IcNeUXc8jc8XVzBJyqjKnDLX9MlRjohrL003UDGPZgQ')
+const stripe = require("stripe")(process.env.STRIPE_SK);
 
 class paymentController {
 	create_stripe_connect_account = async (req, res) => {
@@ -187,7 +187,7 @@ class paymentController {
 
 			await stripe.transfers.create({
 				amount: payment.amount * 100,
-				currency: "usd",
+				currency: "inr",
 				destination: stripeId,
 			});
 

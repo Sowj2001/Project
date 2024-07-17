@@ -4,9 +4,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import CheckoutForm from "./CheckoutForm";
 
-const stripePromise = loadStripe('pk_test_51Oml5cGAwoXiNtjJgPPyQngDj9WTjawya4zCsqTn3LPFhl4VvLZZJIh9fW9wqVweFYC5f0YEb9zjUqRpXbkEKT7T00eU1xQvjp')
+// const stripePromise = loadStripe('pk_test_51Oml5cGAwoXiNtjJgPPyQngDj9WTjawya4zCsqTn3LPFhl4VvLZZJIh9fW9wqVweFYC5f0YEb9zjUqRpXbkEKT7T00eU1xQvjp')
 
-
+const stripePromise = loadStripe('pk_test_51PYQ2pRuQvfO4D895YT2smHMIZkHgRd8AZZ2a597NzauasFYatm9hbb8spbvQnU2xXc8sqffI65T6iWCwXFGmAgW00mT2t0KAV')
 // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const Stripe = ({ price, orderId }) => {
@@ -43,8 +43,7 @@ const Stripe = ({ price, orderId }) => {
       ) : (
         <button
           onClick={create_payment}
-          className="px-10 py-[6px] rounded-sm hover:shadow-green-700/30 hover:shadow-lg bg-green-700 text-white"
-        >
+          className="px-10 py-[6px] rounded-sm hover:shadow-green-700/30 hover:shadow-lg bg-green-700 text-white">
           Start Payment
         </button>
       )}
