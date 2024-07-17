@@ -165,7 +165,25 @@ class productController{
 
     })
   }
+
   // End Method 
+
+
+// DELETE a product
+product_delete=async(req,res) =>{
+    try {
+        const { productId } = req.params; // Extract the product ID from request parameters
+        await productModel.findByIdAndDelete(productId); // Find and delete the product by its ID
+        res.status(200).json({ message: 'Product deleted successfully' }); // Respond with success message
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete product' }); // Handle any errors during deletion
+    }
+};
+
+
+
+
+
 
 
 
