@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function ForgotPassword() {
-    const [email, setEmail] = useState('');
+function ResetPassword() {
+    const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const { id, token } = useParams();
 
     axios.defaults.withCredentials = true;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/forgot-password', { email })
+        axios.post(`http://localhost:5000/reset-password/${id}/${token}`, { password })
         .then(res => {
             if (res.data.Status === "Success") {
-                setMessage('Email sent successfully');
+                setMessage('Password updated successfully');
                 setTimeout(() => {
                     setMessage('');
                     navigate('/login');
                 }, 3000); // Redirect after 3 seconds
             } else {
-                setMessage('Failed to send email');
+                setMessage('Failed to update password');
+                console.log(res.data.Status);
             }
         }).catch(err => {
             console.log(err);
@@ -29,11 +31,9 @@ function ForgotPassword() {
     };
 
     return (
-        <div 
-            className="flex justify-center items-center min-h-screen bg-gray-100 bg-cover bg-center" >
-            
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md bg-opacity-75 backdrop-blur-sm">
-                <h4 className="text-2xl font-semibold mb-4 text-center">Forgot Password</h4>
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+                <h4 className="text-2xl font-semibold mb-4 text-center">Reset Password</h4>
                 {message && (
                     <div className="mb-4 text-center text-green-500">
                         {message}
@@ -41,21 +41,21 @@ function ForgotPassword() {
                 )}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                            Email
+                        <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
+                            New Password
                         </label>
                         <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter Email"
+                            type="password"
+                            id="password"
+                            placeholder="Enter Password"
                             autoComplete="off"
-                            name="email"
+                            name="password"
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <button type="submit" className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition duration-200">
-                        Send
+                        Update
                     </button>
                 </form>
             </div>
@@ -63,4 +63,4 @@ function ForgotPassword() {
     );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

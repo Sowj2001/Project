@@ -19,7 +19,7 @@ import Dashboard from './pages/Dashboard';
 import ProtectUser from './utils/ProtectUser';
 import Index from './components/dashboard/Index';
 import Orders from './components/dashboard/Orders';
-import ChangePassword from './components/dashboard/ChangePassword';
+
 import Wishlist from './components/dashboard/Wishlist';
 import OrderDetails from './components/dashboard/OrderDetails';
 import Chat from './components/dashboard/Chat';
@@ -27,6 +27,7 @@ import ConfirmOrder from './pages/ConfirmOrder';
 import AboutUs from './pages/AboutUs';
 import ForgotPassword from './pages/ForgotPassword';
 import ContactUs from './pages/ContactUs';
+import ResetPassword from './pages/ResetPassword';
 
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
+      <Route path='/reset-password/:id/:token' element={<ResetPassword/>}/>
+
       <Route path='/shops' element={<Shops/>} />
       <Route path='/card' element={<Card/>} />
       <Route path='/shipping' element={<Shipping/>} />
