@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import Footer from './../components/Footer';
+import Header from '../components/Header';
 
 const AboutUs = () => {
     return (
-        <div className="bg-gray-100 py-10">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <Link to='/' className='text-[#059473] text-slate-600 hover:underline'>Home</Link>
-            </div>
+        
+    <div>
+               <Header/>
+        
 
             {/* Hero Section */}
-            <div className="relative bg-white overflow-hidden">
+            <div className="m-4 relative bg-white overflow-hidden">
                 <div className="absolute inset-0">
                     <img 
                         className="w-full h-full object-cover" 
@@ -70,7 +72,9 @@ const AboutUs = () => {
                     </p>
                 </div>
             </div>
-        </div>
+            <Footer/>
+            </div>
+    
     );
 }
 

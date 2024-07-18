@@ -26,6 +26,7 @@ import Chat from './components/dashboard/Chat';
 import ConfirmOrder from './pages/ConfirmOrder';
 import AboutUs from './pages/AboutUs';
 import ForgotPassword from './pages/ForgotPassword';
+import ContactUs from './pages/ContactUs';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/about' element={<AboutUs/>}></Route>
       <Route path='/vendors' element={<Vendors/>}></Route>
+      <Route path='/contact' element={<ContactUs/>}></Route>
       
     
       <Route path='/login' element={<Login/>} />
