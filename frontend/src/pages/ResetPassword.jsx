@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Lottie from 'lottie-react';
 
 function ResetPassword() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [animationData, setAnimationData] = useState(null);
     const navigate = useNavigate();
     const { id, token } = useParams();
 
     axios.defaults.withCredentials = true;
+
+    useEffect(() => {
+        // Fetch the animation JSON
+        fetch('https://assets10.lottiefiles.com/packages/lf20_lxna8w5d.json')
+            .then(response => response.json())
+            .then(data => setAnimationData(data))
+            .catch(error => console.error('Error fetching the animation:', error));
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,8 +41,8 @@ function ResetPassword() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <div className="flex flex-col items-center min-h-screen bg-gray-100 relative">
+            <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg mt-12 z-10">
                 <h4 className="text-2xl font-semibold mb-4 text-center">Reset Password</h4>
                 {message && (
                     <div className="mb-4 text-center text-green-500">
@@ -59,6 +69,11 @@ function ResetPassword() {
                     </button>
                 </form>
             </div>
+            {animationData && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+                    <Lottie animationData={animationData} loop={true} className="w-48 h-48" />
+                </div>
+            )}
         </div>
     );
 }
