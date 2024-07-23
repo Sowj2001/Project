@@ -121,7 +121,7 @@ const Header = () => {
                                         </li>
 
                                     <li>
-                                        <Link className={`p-2 block ${pathname === '/contact' ? 'text-[#059473]' : 'text-slate-600'}`}>Contact Us</Link>
+                                        <Link to="/contact"className={`p-2 block ${pathname === '/contact' ? 'text-[#059473]' : 'text-slate-600'}`}>Contact Us</Link>
                                     </li>
                                 </ul>
 
@@ -177,13 +177,16 @@ const Header = () => {
                                 <Link className={`py-2 block ${pathname === '/' ? 'text-[#059473]' : 'text-slate-600'}`}>Home</Link>
                             </li>
                             <li>
+                                <Link to='/vendors' className={`py-2 block ${pathname === '/vendors' ? 'text-[#059473]' : 'text-slate-600'}`}>Vendors</Link>
+                            </li>
+                            <li>
                                 <Link to='/shops' className={`py-2 block ${pathname === '/shops' ? 'text-[#059473]' : 'text-slate-600'}`}>Vendors</Link>
                             </li>
                             <li>
-                                <Link className={`py-2 block ${pathname === '/about' ? 'text-[#059473]' : 'text-slate-600'}`}>About Us</Link>
+                                <Link to='/about'className={`py-2 block ${pathname === '/about' ? 'text-[#059473]' : 'text-slate-600'}`}>About Us</Link>
                             </li>
                             <li>
-                                <Link className={`py-2 block ${pathname === '/contact' ? 'text-[#059473]' : 'text-slate-600'}`}>Contact Us</Link>
+                                <Link to='/contact'className={`py-2 block ${pathname === '/contact' ? 'text-[#059473]' : 'text-slate-600'}`}>Contact Us</Link>
                             </li>
                         </ul>
 
@@ -225,7 +228,7 @@ const Header = () => {
                                 <span className='pt-1'><IoIosArrowDown /></span>
                             </div>
 
-                            <div className={`${categoryShow ? 'h-0' : 'h-[400px]'} overflow-hidden transition-all md-lg:relative duration-500 absolute z-[99999] bg-[#dbf3ed] w-full border-x`}>
+                            <div className={`${categoryShow ? 'h-0' : 'h-auto'} overflow-hidden transition-all md-lg:relative duration-500 absolute z-[99999] bg-[#dbf3ed] w-full border-x`}>
                                 <ul className='py-2 text-slate-600 font-medium'>
                                     {categorys.map((c, i) => (
                                         <li key={i} className='flex justify-start items-center gap-2 px-[24px] py-[6px]'>
@@ -247,7 +250,7 @@ const Header = () => {
                                     <div className='relative after:absolute after:h-[25px] after:w-[1px] after:bg-[#afafaf] after:-right-[15px] md:hidden'>
                                         <select
                                             onChange={(e) => setCategory(e.target.value)}
-                                            className='w-[150px] text-slate-600 font-semibold bg-transparent px-2 h-full outline-0 border-none'
+                                            className='w-[165px] text-slate-600 font-semibold bg-transparent px-2 h-full outline-0 border-none'
                                             name=''
                                             id=''
                                         >

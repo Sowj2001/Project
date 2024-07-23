@@ -1,12 +1,16 @@
 const express = require('express')
+const jwt=require('jsonwebtoken')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const bcrypt = require('bcryptjs')
+const nodemailer=require('nodemailer')
 const { dbConnect } = require('./utiles/db')
 
 const socket = require('socket.io')
 const http = require('http')
+const customerModel = require('./models/customerModel')
 const server = http.createServer(app)
 app.use(cors({
     origin : ['http://localhost:3000','http://localhost:3001'],
@@ -135,6 +139,135 @@ app.use('/api',require('./routes/paymentRoutes'))
 app.use('/api',require('./routes/dashboard/dashboardRoutes'))
 
 app.get('/',(req,res) => res.send('Hello Server'))
+
+
+
+
+
+
+// app.post('/forgot-password', (req, res) => {
+//     const { email } = req.body;
+//     customerModel.findOne({ email: email })
+//     .then(user => {
+//         if (!user) {
+//             return res.send({ Status: "user not existed" });
+//         }
+
+//         const token = jwt.sign({ id: user._id }, "jwt_secrete_key", { expiresIn: "1d" });
+//         var transporter = nodemailer.createTransport({
+//             service: 'gmail',
+//             secure: true,
+//             port: 465,
+//             auth: {
+//                 user: 'bizcartforalll@gmail.com',
+//                 pass: 'qmcxxtmoetijstty'
+//             }
+//         });
+
+//         var mailOptions = {
+//             from: 'bizcartforalll@gmail.com',
+//             to: user.email,
+//             subject: 'Reset Password Link',
+//             text: `http://localhost:3000/reset-password/${user._id}/${token}`
+//         };
+
+//         transporter.sendMail(mailOptions, function (error, info) {
+//             if (error) {
+//                 console.log(error);
+//             } else {
+//                 return res.send({ Status: "Success" });
+//             }
+//         });
+//     });
+// });
+
+
+// app.post('/reset-password/:id/:token', (req, res) => {
+//     const {id, token} = req.params
+//     const {password} = req.body
+
+//     jwt.verify(token, "jwt_secret_key", (err, decoded) => {
+//         if(err) {
+//             return res.json({Status: "Error with token"})
+//         } else {
+//             bcrypt.hash(password, 20)
+//             .then(hash => {
+//                 customerModel.findByIdAndUpdate({_id: id}, {password: hash})
+//                 .then(user => res.send({Status: "Success"}))
+//                 .catch(err => res.send({Status: err}))
+//             })
+//             .catch(err => res.send({Status: err}))
+//         }
+//     })
+// })
+app.post('/forgot-password', (req, res) => {
+    const { email } = req.body;
+    customerModel.findOne({ email: email })
+    .then(user => {
+        if (!user) {
+            return res.send({ Status: "user not existed" });
+        }
+
+        const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" });
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            secure: true,
+            port: 465,
+            auth: {
+                user: 'bizcartforalll@gmail.com',
+                pass: 'qmcxxtmoetijstty'
+            }
+        });
+
+        var mailOptions = {
+            from: 'bizcartforalll@gmail.com',
+            to: user.email,
+            subject: 'Reset Password Link',
+            text: `http://localhost:3000/reset-password/${user._id}/${token}`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                return res.send({ Status: "Success" });
+            }
+        });
+    })
+    .catch(err => console.log(err));
+});
+
+app.post('/reset-password/:id/:token', (req, res) => {
+    const {id, token} = req.params;
+    const {password} = req.body;
+
+    jwt.verify(token, "jwt_secret_key", (err, decoded) => {
+        if(err) {
+            return res.json({Status: "Error with token"});
+        } else {
+            bcrypt.hash(password, 10) // Reduce salt rounds to 10
+            .then(hash => {
+                customerModel.findByIdAndUpdate(id, { password: hash })
+                .then(user => {
+                    if (!user) {
+                        return res.send({ Status: "User not found" });
+                    }
+                    res.send({ Status: "Success" });
+                })
+                .catch(err => {
+                    console.log("Error updating password:", err);
+                    res.send({ Status: err.message });
+                });
+            })
+            .catch(err => {
+                console.log("Error hashing password:", err);
+                res.send({ Status: err.message });
+            });
+        }
+    });
+});
+
+
 const port = process.env.PORT
 dbConnect()
 server.listen(port, () => console.log(`Server is running on port ${port}`))

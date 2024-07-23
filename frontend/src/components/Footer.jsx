@@ -33,7 +33,7 @@ const Footer = () => {
                     {/* Join Our Shop Section */}
                     <div className='flex flex-col items-center md:items-start mb-4 md:mb-0'>
                         <Typography variant="h6" className='mb-4'>Join Our Shop</Typography>
-                        <Typography variant="body2" className='text-gray-200 mb-2'>Subscribe for updates and special offers</Typography>
+                        <Typography variant="paragraph" className='text-gray-200 mb-2'>Subscribe for updates and special offers</Typography>
                         <div className='flex gap-2 mb-4'>
                             <Input variant="outlined" label="Enter Your Email" className="bg-white text-black rounded-l-md" />
                             <Button variant="gradient" color="green" className="rounded-r-md">Subscribe</Button>
@@ -43,7 +43,7 @@ const Footer = () => {
 
                 {/* Copyright Section */}
                 <div className='text-center text-sm text-gray-200'>
-                    <Typography variant="body2">© 2024 All Rights Reserved</Typography>
+                    <Typography variant="paragraph">© 2024 All Rights Reserved</Typography>
                 </div>
             </div>
         </footer>
