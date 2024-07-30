@@ -10,7 +10,10 @@ const { dbConnect } = require('./utiles/db')
 
 const socket = require('socket.io')
 const http = require('http')
-const customerModel = require('./models/customerModel')
+const customerModel = require('./models/customerModel');
+const sellerModel = require('./models/sellerModel');
+
+
 const server = http.createServer(app)
 app.use(cors({
     origin : ['http://localhost:3000','http://localhost:3001'],
@@ -141,10 +144,6 @@ app.use('/api',require('./routes/dashboard/dashboardRoutes'))
 app.get('/',(req,res) => res.send('Hello Server'))
 
 
-
-
-
-
 // app.post('/forgot-password', (req, res) => {
 //     const { email } = req.body;
 //     customerModel.findOne({ email: email })
@@ -153,7 +152,7 @@ app.get('/',(req,res) => res.send('Hello Server'))
 //             return res.send({ Status: "user not existed" });
 //         }
 
-//         const token = jwt.sign({ id: user._id }, "jwt_secrete_key", { expiresIn: "1d" });
+//         const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" });
 //         var transporter = nodemailer.createTransport({
 //             service: 'gmail',
 //             secure: true,
@@ -178,90 +177,122 @@ app.get('/',(req,res) => res.send('Hello Server'))
 //                 return res.send({ Status: "Success" });
 //             }
 //         });
-//     });
+//     })
+//     .catch(err => console.log(err));
 // });
 
-
 // app.post('/reset-password/:id/:token', (req, res) => {
-//     const {id, token} = req.params
-//     const {password} = req.body
+//     const {id, token} = req.params;
+//     const {password} = req.body;
 
 //     jwt.verify(token, "jwt_secret_key", (err, decoded) => {
 //         if(err) {
-//             return res.json({Status: "Error with token"})
+//             return res.json({Status: "Error with token"});
 //         } else {
-//             bcrypt.hash(password, 20)
+//             bcrypt.hash(password, 10) // Reduce salt rounds to 10
 //             .then(hash => {
-//                 customerModel.findByIdAndUpdate({_id: id}, {password: hash})
-//                 .then(user => res.send({Status: "Success"}))
-//                 .catch(err => res.send({Status: err}))
+//                 customerModel.findByIdAndUpdate(id, { password: hash })
+//                 .then(user => {
+//                     if (!user) {
+//                         return res.send({ Status: "User not found" });
+//                     }
+//                     res.send({ Status: "Success" });
+//                 })
+//                 .catch(err => {
+//                     console.log("Error updating password:", err);
+//                     res.send({ Status: err.message });
+//                 });
 //             })
-//             .catch(err => res.send({Status: err}))
-//         }
-//     })
-// })
+//             .catch(err => {
+//                 console.log("Error hashing password:", err);
+//                 res.send({ Status: err.message });
+//             });
+//         }
+//     });
+// });
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS;
+
+// Forgot Password Route
 app.post('/forgot-password', (req, res) => {
-    const { email } = req.body;
-    customerModel.findOne({ email: email })
+    const { email, userType } = req.body; // userType can be 'customer' or 'seller'
+    
+    // Determine the model based on userType
+    const model = userType === 'seller' ? sellerModel : customerModel;
+
+    model.findOne({ email: email })
     .then(user => {
         if (!user) {
-            return res.send({ Status: "user not existed" });
+            return res.send({ Status: "User not existed" });
         }
 
-        const token = jwt.sign({ id: user._id }, "jwt_secret_key", { expiresIn: "1d" });
-        var transporter = nodemailer.createTransport({
+        const token = jwt.sign({ id: user._id }, JWT_SECRET_KEY, { expiresIn: "1d" });
+        const frontendUrl = userType === 'seller' ? 'http://localhost:3001' : 'http://localhost:3000';
+
+        const transporter = nodemailer.createTransport({
             service: 'gmail',
             secure: true,
             port: 465,
             auth: {
-                user: 'bizcartforalll@gmail.com',
-                pass: 'qmcxxtmoetijstty'
+                user: EMAIL_USER,
+                pass: EMAIL_PASS
             }
         });
 
-        var mailOptions = {
-            from: 'bizcartforalll@gmail.com',
+        const mailOptions = {
+            from: EMAIL_USER,
             to: user.email,
             subject: 'Reset Password Link',
-            text: `http://localhost:3000/reset-password/${user._id}/${token}`
+            text: `${frontendUrl}/reset-password/${user._id}/${token}?userType=${userType}`
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
+                return res.send({ Status: "Error sending email" });
             } else {
-                return res.send({ Status: "Success" });
+                return res.send({ Status: "Success", Message: "Reset link sent to email" });
             }
         });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        res.send({ Status: "Error", Message: "Something went wrong" });
+    });
 });
 
-app.post('/reset-password/:id/:token', (req, res) => {
-    const {id, token} = req.params;
-    const {password} = req.body;
 
-    jwt.verify(token, "jwt_secret_key", (err, decoded) => {
-        if(err) {
-            return res.json({Status: "Error with token"});
+
+// Reset Password Route
+app.post('/reset-password/:id/:token', (req, res) => {
+    const { id, token } = req.params;
+    const { password, userType } = req.body; // Include userType to identify the model
+
+    jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
+        if (err) {
+            return res.json({ Status: "Error with token" });
         } else {
-            bcrypt.hash(password, 10) // Reduce salt rounds to 10
+            bcrypt.hash(password, 10) // Salting rounds set to 10
             .then(hash => {
-                customerModel.findByIdAndUpdate(id, { password: hash })
+                const model = userType === 'seller' ? sellerModel : customerModel;
+
+                model.findByIdAndUpdate(id, { password: hash })
                 .then(user => {
                     if (!user) {
                         return res.send({ Status: "User not found" });
                     }
-                    res.send({ Status: "Success" });
+                    res.send({ Status: "Success", Message: "Password updated successfully" });
                 })
                 .catch(err => {
                     console.log("Error updating password:", err);
-                    res.send({ Status: err.message });
+                    res.send({ Status: "Error", Message: err.message });
                 });
             })
             .catch(err => {
                 console.log("Error hashing password:", err);
-                res.send({ Status: err.message });
+                res.send({ Status: "Error", Message: err.message });
             });
         }
     });

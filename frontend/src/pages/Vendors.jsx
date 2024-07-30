@@ -20,24 +20,31 @@ const Vendors = () => {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <Header/>
-            <h1 className="text-3xl font-bold mb-8">Vendors</h1>
-            {loading && <p>Loading vendors...</p>}
-            {error && <p>Error fetching vendors: {error}</p>}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {vendors.map((vendor) => (
-                    <div
-                        key={vendor.sellerId}
-                        className="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow"
-                        onClick={() => handleVendorClick(vendor.sellerId)}
-                    >
-                        <h2 className="text-xl font-semibold mb-2">{vendor.shopName}</h2>
-                        {/* Add more vendor details if needed */}
-                    </div>
-                ))}
-            </div>
-            <Footer/>
+        <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow container mx-auto px-4 py-8">
+                <h1 className="text-4xl font-extrabold text-gray-800 mb-12 text-center">Vendors</h1>
+                {loading && <p className="text-center text-gray-600">Loading vendors...</p>}
+                {error && <p className="text-center text-red-600">Error fetching vendors: {error}</p>}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {vendors.map((vendor) => (
+                        <div
+                            key={vendor.sellerId}
+                            className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:shadow-xl cursor-pointer"
+                            onClick={() => handleVendorClick(vendor.sellerId)}
+                        >
+                            <div className="relative h-40 bg-gray-200">
+                                {/* Add vendor logo or image if available */}
+                            </div>
+                            <div className="p-6">
+                                <h2 className="text-2xl font-semibold text-gray-800 mb-2">{vendor.shopName}</h2>
+                                {/* Add more vendor details if needed */}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </main>
+            <Footer />
         </div>
     );
 };

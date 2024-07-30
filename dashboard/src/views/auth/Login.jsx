@@ -76,7 +76,7 @@ const Login = () => {
                                 <p>Don't Have an account? <Link className='font-bold' to="/register">Sign Up</Link> </p>
                             </div>
                             <div className='text-center'>
-                                <Link to="/forgot-password" className='text-sm text-black underline'>Forgot Password?</Link>
+                            <Link to='/forgot-password' className='text-blue-500'>Forgot Password?</Link>
                             </div>
                         </form>
                     </div>
