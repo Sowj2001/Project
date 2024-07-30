@@ -1,3 +1,4 @@
+// src/store/reducers/vendorsReducer.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../api/api';
 
@@ -16,7 +17,7 @@ export const fetchVendors = createAsyncThunk(
             }, []);
             return fulfillWithValue(vendors);
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.message);
         }
     }
 );
