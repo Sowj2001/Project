@@ -1,4 +1,5 @@
 const categoryModel = require('../../models/categoryModel')
+const sellerModel = require('../../models/sellerModel')
 const productModel = require('../../models/productModel')
 const reviewModel = require('../../models/reviewModel')
 const { responseReturn } = require("../../utiles/response")
@@ -38,6 +39,19 @@ class homeControllers{
         }
     }
     // end method 
+
+
+    get_active_sellers = async (req, res) => {
+        try {
+          const sellers = await sellerModel.find({ status: 'active' });
+          responseReturn(res, 200, { sellers });
+        } catch (error) {
+          console.log(error.message);
+          responseReturn(res, 500, { error: 'Internal Server Error' });
+        }
+      };
+
+       // end method 
 
     get_products = async(req, res) => {
         try {
