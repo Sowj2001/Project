@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
+
 import { jwtDecode } from "jwt-decode";
 
 export const admin_login = createAsyncThunk(
@@ -67,22 +68,35 @@ export const profile_image_upload = createAsyncThunk(
 )
 // end method 
 
+// export const seller_register = createAsyncThunk(
+//     'auth/seller_register',
+//     async(info,{rejectWithValue, fulfillWithValue}) => { 
+//         try {
+//             console.log(info)
+//             const {data} = await api.post('/seller-register',info,{withCredentials: true})
+//             localStorage.setItem('accessToken',data.token)
+//             //  console.log(data)
+//             return fulfillWithValue(data)
+//         } catch (error) {
+//             // console.log(error.response.data)
+//             return rejectWithValue(error.response.data)
+//         }
+//     }
+// )
 export const seller_register = createAsyncThunk(
     'auth/seller_register',
-    async(info,{rejectWithValue, fulfillWithValue}) => { 
+    async (info, { rejectWithValue, fulfillWithValue }) => {
         try {
-            console.log(info)
-            const {data} = await api.post('/seller-register',info,{withCredentials: true})
-            localStorage.setItem('accessToken',data.token)
-            //  console.log(data)
-            return fulfillWithValue(data)
+            const { data } = await api.post('/seller-register', info, { withCredentials: true });
+            localStorage.setItem('accessToken', data.token);
+            return fulfillWithValue(data);
         } catch (error) {
-            // console.log(error.response.data)
-            return rejectWithValue(error.response.data)
+            // Detailed logging
+            console.error('Register API Error:', error);
+            return rejectWithValue(error.response ? error.response.data : { error: 'An unknown error occurred' });
         }
     }
-)
-
+);
 // end method 
 
 export const profile_info_add = createAsyncThunk(

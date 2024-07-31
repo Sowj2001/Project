@@ -8,6 +8,7 @@ const AboutUs = () => {
             <Header />
 
             {/* Hero Section */}
+            <div className='p-5'></div>
             <div className='relative bg-gray-900 overflow-hidden'>
                 <div className="absolute inset-0">
                     <img 
