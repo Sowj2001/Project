@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Vendors from './pages/Vendors';
+import VendorProducts from './pages/VendorProducts';
 import Shops from './pages/Shops';
 import Card from './pages/Card';
 import Shipping from './pages/Shipping';
@@ -43,6 +44,7 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/about' element={<AboutUs/>}></Route>
       <Route path='/vendors' element={<Vendors/>}></Route>
+      <Route path="/vendor/:sellerId/products" element={<VendorProducts />} />
       <Route path='/contact' element={<ContactUs/>}></Route>
       
     

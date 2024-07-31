@@ -222,6 +222,19 @@ export const fetchVendors = createAsyncThunk(
     }
 );
 
+export const fetchVendorProducts = createAsyncThunk(
+    'vendors/fetchVendorProducts',
+    async (sellerId, { rejectWithValue }) => {
+        try {
+            const response = await api.get(`/home/seller/${sellerId}/products`);
+            return response.data;
+        } catch (error) {
+            console.error('API error:', error); // Log the error for debugging
+            return rejectWithValue(error.response?.data || 'Unknown error occurred');
+        }
+    }
+);
+
 // Other async thunks
 export const get_category = createAsyncThunk(
     'product/get_category',
@@ -333,6 +346,7 @@ export const homeReducer = createSlice({
     initialState: {
         categorys: [],
         products: [],
+        vendorproducts: [],
         totalProduct: 0,
         parPage: 3,
         latest_product: [],
@@ -408,6 +422,18 @@ export const homeReducer = createSlice({
         .addCase(fetchVendors.rejected, (state, { payload }) => {
             state.loadingVendors = false;
             state.errorVendors = payload;
+        })
+        .addCase(fetchVendorProducts.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(fetchVendorProducts.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.vendorproducts = payload;
+        })
+        .addCase(fetchVendorProducts.rejected, (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
         });
     }
 });

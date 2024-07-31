@@ -305,6 +305,17 @@ get_reviews = async (req, res) => {
 // end method
 
 
+getProductsBySeller = async (req, res) => {
+    try {
+        const products = await productModel.find({ sellerId: req.params.sellerId });
+        responseReturn(res, 200, products);
+    } catch (error) {
+        console.log(error.message);
+        responseReturn(res, 500, { message: error.message });
+    }
+};
+// end method
+
 }
 
 module.exports = new homeControllers()
