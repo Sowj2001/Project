@@ -45,7 +45,7 @@ const Register = () => {
             toast.error(errorMessage);
             dispatch(messageClear());
         }
-    }, [successMessage, errorMessage]);
+    }, [successMessage, errorMessage,dispatch,navigate]);
 
     return (
         <div className='min-w-screen min-h-screen flex items-center justify-center bg-cover bg-center'

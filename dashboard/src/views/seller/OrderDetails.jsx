@@ -45,8 +45,8 @@ const OrderDetails = () => {
                 <select onChange={status_update} value={status} name="" id="" className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#475569] border border-slate-700 rounded-md text-[#d0d2d6]'>
                 <option value="warehouse">warehouse</option>
                 <option value="processing">processing</option>
-                <option value="placed">shipped</option>
-                <option value="pending">successful</option>
+                <option value="shipped">shipped</option>
+                <option value="successful">successful</option>
                 <option value="cancelled">cancelled</option>
                 </select> 
             </div>

@@ -6,6 +6,8 @@ const bcrpty = require('bcrypt')
 const { createToken } = require('../utiles/tokenCreate')
 const cloudinary = require('cloudinary').v2
 const formidable = require("formidable")
+const bcrypt = require('bcrypt');
+
 
 class authControllers{
    
@@ -79,42 +81,73 @@ class authControllers{
     // End Method 
 
 
-    seller_register = async(req, res) => {
-         const {email,name,password} = req.body
-         try {
-            const getUser = await sellerModel.findOne({email})
-            if (getUser) {
-                responseReturn(res,404,{error: 'Email Already Exit'})
-            }else{
-                const seller = await sellerModel.create({
-                    name,
-                    email,
-                    password: await bcrpty.hash(password, 10),
-                    method : 'menualy',
-                    shopInfo: {}
-                })
-               await sellerCustomerModel.create({
-                     myId: seller.id
-               })
+    // seller_register = async(req, res) => {
+    //      const {email,name,password} = req.body
+    //      try {
+    //         const getUser = await sellerModel.findOne({email})
+    //         if (getUser) {
+    //             responseReturn(res,404,{error: 'Email Already Exit'})
+    //         }else{
+    //             const seller = await sellerModel.create({
+    //                 name,
+    //                 email,
+    //                 password: await bcrpty.hash(password, 10),
+    //                 method : 'menualy',
+    //                 shopInfo: {}
+    //             })
+    //            await sellerCustomerModel.create({
+    //                  myId: seller.id
+    //            })
 
-               const token = await createToken({ id : seller.id, role: seller.role })
-               res.cookie('accessToken',token, {
-                expires : new Date(Date.now() + 7*24*60*60*1000 )
-               })
+    //            const token = await createToken({ id : seller.id, role: seller.role })
+    //            res.cookie('accessToken',token, {
+    //             expires : new Date(Date.now() + 7*24*60*60*1000 )
+    //            })
 
-               responseReturn(res,201,{token,message: 'Register Success'})
-            }
-         } catch (error) {
-            responseReturn(res,500,{error: 'Internal Server Error'})
-         }
-    }
+    //            responseReturn(res,201,{token,message: 'Register Success'})
+    //         }
+    //      } catch (error) {
+    //         responseReturn(res,500,{error: 'Internal Server Error'})
+    //      }
+    // }
     // End Method 
 
-
-
-
-
-
+    seller_register = async (req, res) => {
+        const { email, name, password } = req.body;
+        try {
+            // Check if the email already exists
+            const existingSeller = await sellerModel.findOne({ email });
+            if (existingSeller) {
+                return responseReturn(res, 400, { error: 'Email Already Exists' });
+            }
+    
+            // Create a new seller
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const seller = await sellerModel.create({
+                name,
+                email,
+                password: hashedPassword,
+                method: 'manual',
+                shopInfo: {} // Initialize shopInfo as an empty object
+            });
+    
+            // Create a corresponding entry in sellerCustomerModel
+            await sellerCustomerModel.create({ myId: seller.id });
+    
+            // Generate a token and set it in cookies
+            const token = await createToken({ id: seller.id, role: seller.role });
+            res.cookie('accessToken', token, {
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+                httpOnly: true
+            });
+    
+            // Send success response
+            responseReturn(res, 201, { token, message: 'Register Success' });
+        } catch (error) {
+            console.error('Registration Error:', error); // Detailed logging
+            responseReturn(res, 500, { error: 'Internal Server Error' });
+        }
+    };
 
     getUser = async (req, res) => {
         const {id, role} = req;
@@ -169,41 +202,75 @@ class authControllers{
 
     // End Method 
 
-    profile_info_add = async (req, res) => {
-       const { division,district,shopName,sub_district } = req.body;
-       const {id} = req;
+    // profile_info_add = async (req, res) => {
+    //    const { division,district,shopName,sub_district } = req.body;
+    //    const {id} = req;
 
-       try {
+    //    try {
+    //     await sellerModel.findByIdAndUpdate(id, {
+    //         shopInfo: {
+    //             shopName,
+    //             division,
+    //             district,
+    //             sub_district
+    //         }
+    //     })
+    //     const userInfo = await sellerModel.findById(id)
+    //     responseReturn(res, 201,{ message : 'Profile info Add Successfully',userInfo})
+        
+    //    } catch (error) {
+    //     responseReturn(res, 500,{ error : error.message })
+    //    }
+
+
+    // }
+// End Method 
+
+
+profile_info_add = async (req, res) => {
+    const { division, district, shopName, sub_district, phoneNumber, gstn } = req.body;
+    const { id } = req;
+
+    try {
+        const seller = await sellerModel.findById(id);
+        if (!seller) {
+            return responseReturn(res, 404, { error: 'Seller Not Found' });
+        }
+
+        if (!phoneNumber || !shopName || !gstn) {
+            return responseReturn(res, 400, { error: 'Please provide all required fields' });
+        }
+
+        // Check if GST number matches the expected format
+        const gst = "GST";
+        const phoneNumberLast3Digits = phoneNumber.slice(-3);
+        const shopNameFirst3Letters = shopName.slice(0, 3).toUpperCase();
+        const expectedGstn = `${gst}${phoneNumberLast3Digits}${shopNameFirst3Letters}`;
+
+        if (gstn !== expectedGstn) {
+            return responseReturn(res, 400, { error: 'Invalid GST number format' });
+        }
+
         await sellerModel.findByIdAndUpdate(id, {
             shopInfo: {
                 shopName,
                 division,
                 district,
-                sub_district
+                sub_district,
+                phoneNumber,
+                gstn
             }
-        })
-        const userInfo = await sellerModel.findById(id)
-        responseReturn(res, 201,{ message : 'Profile info Add Successfully',userInfo})
-        
-       } catch (error) {
-        responseReturn(res, 500,{ error : error.message })
-       }
+        });
 
+        const userInfo = await sellerModel.findById(id);
+        responseReturn(res, 200, { message: 'Profile info added successfully', userInfo }); // Change status code to 200
 
+    } catch (error) {
+        console.error('Profile Info Error:', error);
+        responseReturn(res, 500, { error: 'Internal Server Error' });
     }
-// End Method 
+};
 
-//  logout = async (req, res) => {
-//     try {
-//         res.cookie('accessToken',null,{
-//             expires : new Date(Date.now()),
-//             httpOnly: true
-//         })
-//         responseReturn(res, 200,{ message : 'logout Success' })
-//     } catch (error) {
-//         responseReturn(res, 500,{ error : error.message })
-//     }
-//  }
 logout = async (req, res) => {
     try {
         res.cookie('accessToken', null, {
