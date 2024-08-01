@@ -99,6 +99,10 @@ const SellerDetails = () => {
             <span>{seller?.shopInfo?.shopName} </span> 
         </div>
         <div className='flex gap-2 font-bold text-[#000000]'>
+            <span>Shop Address : </span>
+            <span>{seller?.shopInfo?.sub_district} </span> 
+        </div>
+        <div className='flex gap-2 font-bold text-[#000000]'>
             <span>State : </span>
             <span>{seller?.shopInfo?.division} </span> 
         </div>
@@ -107,10 +111,7 @@ const SellerDetails = () => {
             <span>District : </span>
             <span>{seller?.shopInfo?.district}  </span> 
         </div>
-        <div className='flex gap-2 font-bold text-[#000000]'>
-            <span>State : </span>
-            <span>{seller?.shopInfo?.sub_district} </span> 
-        </div>
+        
         <div className='flex gap-2 font-bold text-[#000000]'>
             <span>Phone NO : </span>
             <span>{seller?.shopInfo?.phoneNumber} </span> 

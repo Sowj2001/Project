@@ -167,22 +167,24 @@ const Profile = () => {
                                     </div>
 
                                     <div className='flex flex-col w-full gap-1 mb-2'>
+                                        <label htmlFor="sub_district">Shop Address</label>
+                                        <input value={state.sub_district} onChange={inputHandle} className='px-4 py-2 focus:border-indigo-200 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' type="text" name='sub_district' id='sub_district' placeholder='Address' />
+                                        {formErrors.sub_district && <p className='text-red-500 text-sm'>{formErrors.sub_district}</p>}
+                                    </div>
+
+                                    <div className='flex flex-col w-full gap-1 mb-2'>
                                         <label htmlFor="division">State</label>
                                         <input value={state.division} onChange={inputHandle} className='px-4 py-2 focus:border-indigo-200 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' type="text" name='division' id='division' placeholder='State Name' />
                                         {formErrors.division && <p className='text-red-500 text-sm'>{formErrors.division}</p>}
                                     </div>  
 
                                     <div className='flex flex-col w-full gap-1 mb-2'>
-                                        <label htmlFor="district">District Name</label>
-                                        <input value={state.district} onChange={inputHandle} className='px-4 py-2 focus:border-indigo-200 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' type="text" name='district' id='district' placeholder='District Name' />
+                                        <label htmlFor="district">District </label>
+                                        <input value={state.district} onChange={inputHandle} className='px-4 py-2 focus:border-indigo-200 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' type="text" name='district' id='district' placeholder='District ' />
                                         {formErrors.district && <p className='text-red-500 text-sm'>{formErrors.district}</p>}
                                     </div>  
 
-                                    <div className='flex flex-col w-full gap-1 mb-2'>
-                                        <label htmlFor="sub_district">Sub District Name</label>
-                                        <input value={state.sub_district} onChange={inputHandle} className='px-4 py-2 focus:border-indigo-200 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' type="text" name='sub_district' id='sub_district' placeholder='Sub District Name' />
-                                        {formErrors.sub_district && <p className='text-red-500 text-sm'>{formErrors.sub_district}</p>}
-                                    </div>
+                                    
 
                                     <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors'>Submit</button>
                                 </form>
