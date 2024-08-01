@@ -60,6 +60,7 @@ function App() {
       <Route path='/products?' element={<CategoryShop/>} />
       <Route path='/products/search?' element={<SearchProducts/>} />
       <Route path='/product/details/:slug' element={<Details/>} /> 
+      <Route path='/product/details/:id' element={<Details/>} /> 
       <Route path='/order/confirm?' element={<ConfirmOrder/>} /> 
 
       <Route path='/dashboard' element={<ProtectUser/>} >

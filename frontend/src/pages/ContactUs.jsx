@@ -9,7 +9,7 @@ const ContactUs = () => {
             
             {/* Hero Section */}
             <div className='p-5'></div>
-            <div className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500">
+            <div className="relative overflow-hidden bg-gradient-to-r h-80 from-blue-900 via-blue-700 to-blue-500">
                 <img 
                     className="w-10 h-10 object-cover opacity-60" 
                     src="https://cdn-icons-png.flaticon.com/256/3095/3095583.png" 
