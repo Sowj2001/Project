@@ -63,11 +63,12 @@ const Vendors = () => {
                                             {vendor.shopInfo?.shopName || 'Shop Name'}
                                         </h2>
                                         <p className="text-gray-600 text-sm mt-2">
-                                            Shop Address: {vendor.shopInfo?.division}
+                                            Shop Address:  {vendor.shopInfo?.sub_district}
                                             <br />
                                             {vendor.shopInfo?.district}
                                             <br />
-                                            {vendor.shopInfo?.sub_district}
+                                            {vendor.shopInfo?.division}
+                                          
                                         </p>
                                 </div>
 

@@ -175,7 +175,7 @@ const Header = () => {
 
             <ul className='flex flex-col justify-start items-start text-sm font-bold uppercase'>
                 <li>
-                    <Link className={`py-2 block ${pathname === '/' ? 'text-[#059473]' : 'text-slate-600'}`}>Home</Link>
+                    <Link to='/' className={`py-2 block ${pathname === '/' ? 'text-[#059473]' : 'text-slate-600'}`}>Home</Link>
                 </li>
                 <li>
                     <Link to='/vendors' className={`py-2 block ${pathname === '/vendors' ? 'text-[#059473]' : 'text-slate-600'}`}>Vendors</Link>
