@@ -156,7 +156,7 @@ const Details = () => {
             state: {
                 products : obj,
                 price: price * quantity,
-                shipping_fee : 50,
+                shipping_fee : 40,
                 items: 1
             }
         }) 
@@ -232,12 +232,12 @@ const Details = () => {
                 <div className='text-3xl text-slate-600 font-bold'>
                     <h3>{product.name} </h3>
                 </div>
-                <div className='flex justify-start items-center gap-4'>
+                {/* <div className='flex justify-start items-center gap-4'>
                     <div className='flex text-xl'>
                         <Rating ratings={4.5} />
                     </div>
                     <span className='text-green-500'>(24 reviews)</span> 
-                </div>
+                </div> */}
 
          <div className='text-2xl text-red-500 font-bold flex gap-3'>
             {

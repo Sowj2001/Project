@@ -147,24 +147,28 @@ const AddProduct = () => {
                 <div className='flex justify-between items-center pb-4'>
                     <h1 className='text-[#d0d2d6] text-xl font-semibold'>Add Product</h1>
                     <Link to='/seller/dashboard/products' className='bg-blue-500 hover:shadow-blue-500/50 hover:shadow-lg text-white rounded-sm px-7 py-2 my-2'>All Product</Link>
+                    {/* <h1 className='text-[#fa3f38] text-xl font-semibold'>Feilds with * are compulsory</h1> */}
+
                 </div>
+                <h6 className='text-[#fa3f38] text-xl font-semibold'>Feilds with * are compulsory</h6>
+
                 <div>
                     <form onSubmit={add}>
                         <div className='flex flex-col mb-3 md:flex-row gap-4 w-full text-[#d0d2d6]'>
                             <div className='flex flex-col w-full gap-1'>
-                                <label htmlFor="name">Product Name</label>
+                                <label htmlFor="name">Product Name*</label>
                                 <input className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' onChange={inputHandle} value={state.name} type="text" name='name' id='name' placeholder='Product Name' />
                             </div>
 
                             <div className='flex flex-col w-full gap-1'>
-                                <label htmlFor="brand">Product Brand</label>
+                                <label htmlFor="brand">Product Brand*</label>
                                 <input className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' onChange={inputHandle} value={state.brand} type="text" name='brand' id='brand' placeholder='Brand Name' />
                             </div>
                         </div>
 
                         <div className='flex flex-col mb-3 md:flex-row gap-4 w-full text-[#d0d2d6]'>
                             <div className='flex flex-col w-full gap-1 relative'>
-                                <label htmlFor="category">Category</label>
+                                <label htmlFor="category">Category*</label>
                                 <input readOnly onClick={() => setCateShow(!cateShow)} className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' value={category} type="text" id='category' placeholder='--select category--' />
 
                                 <div className={`absolute top-[101%] bg-[#475569] w-full transition-all ${cateShow ? 'scale-100' : 'scale-0'}`}>
@@ -186,25 +190,25 @@ const AddProduct = () => {
                             </div>
 
                             <div className='flex flex-col w-full gap-1'>
-                                <label htmlFor="stock">Product Stock</label>
+                                <label htmlFor="stock">Product Stock*</label>
                                 <input className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' onChange={inputHandle} value={state.stock} type="text" name='stock' id='stock' placeholder='Stock' />
                             </div>
                         </div>
 
                         <div className='flex flex-col mb-3 md:flex-row gap-4 w-full text-[#d0d2d6]'>
                             <div className='flex flex-col w-full gap-1'>
-                                <label htmlFor="price">Price</label>
+                                <label htmlFor="price">Price*</label>
                                 <input className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' onChange={inputHandle} value={state.price} type="number" name='price' id='price' placeholder='price' />
                             </div>
 
                             <div className='flex flex-col w-full gap-1'>
-                                <label htmlFor="discount">Discount</label>
+                                <label htmlFor="discount">Discount*</label>
                                 <input className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' onChange={inputHandle} value={state.discount} type="number" name='discount' id='discount' placeholder='discount by %' />
                             </div>
                         </div>
 
                         <div className='flex flex-col w-full gap-1 mb-5'>
-                            <label htmlFor="description" className='text-[#d0d2d6]'>Description</label>
+                            <label htmlFor="description" className='text-[#d0d2d6]'>Description*</label>
                             <textarea className='px-4 py-2 focus:border-indigo-500 outline-none bg-[#6a5fdf] border border-slate-700 rounded-md text-[#d0d2d6]' onChange={inputHandle} value={state.description} name='description' id='description' placeholder='Description' cols="10" rows="4"></textarea>
                         </div>
 
@@ -221,7 +225,7 @@ const AddProduct = () => {
 
                             <label className='flex justify-center items-center flex-col h-[180px] cursor-pointer border border-dashed hover:border-red-500 w-full text-[#d0d2d6]' htmlFor="image">
                                 <span><IoMdImages /></span>
-                                <span>Select Image </span>
+                                <span>Select Image* </span>
                             </label>
                             <input className='hidden' onChange={imageHandle} multiple type="file" id='image' />
                         </div>

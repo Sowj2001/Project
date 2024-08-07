@@ -90,11 +90,11 @@ const Category = () => {
 			<div className='flex flex-wrap w-full'>
 				<div className='w-full lg:w-7/12'>
 					<div className='w-full p-4 bg-[#6a5fdf] rounded-md'>
-						<Search
+						{/* <Search
 							setParPage={setParPage}
 							setSearchValue={setSearchValue}
 							searchValue={searchValue}
-						/>
+						/> */}
 
 						<div className='relative overflow-x-auto'>
 							<table className='w-full text-sm text-left text-[#d0d2d6]'>
@@ -109,9 +109,9 @@ const Category = () => {
 										<th scope='col' className='py-3 px-4'>
 											Name
 										</th>
-										<th scope='col' className='py-3 px-4'>
+										{/* <th scope='col' className='py-3 px-4'>
 											Action
-										</th>
+										</th> */}
 									</tr>
 								</thead>
 
@@ -145,7 +145,7 @@ const Category = () => {
 												scope='row'
 												className='py-1 px-4 font-medium whitespace-nowrap'
 											>
-												<div className='flex justify-start items-center gap-4'>
+												{/* <div className='flex justify-start items-center gap-4'>
 													<Link className='p-[6px] bg-yellow-500 rounded hover:shadow-lg hover:shadow-yellow-500/50'>
 														{" "}
 														<FaEdit />{" "}
@@ -154,7 +154,7 @@ const Category = () => {
 														{" "}
 														<FaTrash />{" "}
 													</Link>
-												</div>
+												</div> */}
 											</td>
 										</tr>
 									))}
