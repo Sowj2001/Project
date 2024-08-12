@@ -3,7 +3,7 @@ import React from 'react';
 const Deactive = () => {
     return (
         <div>
-            deactive
+            <h1>Account Deactivated</h1>
         </div>
     );
 };

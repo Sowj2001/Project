@@ -5,7 +5,7 @@ import { FaList } from 'react-icons/fa';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { IoIosHome } from "react-icons/io";
 import { FaBorderAll } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart,FaShoppingCart } from "react-icons/fa";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import api from '../api/api';
@@ -56,6 +56,10 @@ const Dashboard = () => {
                             <li className='flex items-center gap-3 py-2 hover:bg-gray-100 rounded-lg transition duration-200'>
                                 <span className='text-xl text-green-500'><FaHeart /></span>
                                 <Link to='/dashboard/my-wishlist' className='block text-lg'>Wishlist</Link>
+                            </li>
+                             <li className='flex items-center gap-3 py-2 hover:bg-gray-100 rounded-lg transition duration-200'>
+                                <span className='text-xl text-green-500'><FaShoppingCart /></span>
+                                <Link to='/card' className='block text-lg'>Cart</Link>
                             </li>
                             <li className='flex items-center gap-3 py-2 hover:bg-gray-100 rounded-lg transition duration-200'>
                                 <span className='text-xl text-green-500'><IoChatbubbleEllipsesSharp /></span>

@@ -51,6 +51,9 @@ const Profile = () => {
         const errors = {};
         if (!state.shopName) errors.shopName = "Shop Name is required";
         if (!state.phoneNumber) errors.phoneNumber = "Phone Number is required";
+        if (state.phoneNumber && state.phoneNumber.length !== 10) {
+            errors.phoneNumber = "Phone Number must be 10 digits";
+        }
         if (!state.gstn) errors.gstn = "GST Number is required";
         if (!state.division) errors.division = "State is required";
         if (!state.district) errors.district = "District is required";
