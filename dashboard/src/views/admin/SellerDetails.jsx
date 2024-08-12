@@ -13,7 +13,7 @@ const SellerDetails = () => {
     useEffect(() => {
         dispatch(get_seller(sellerId))
 
-    },[sellerId])
+    },[sellerId,dispatch])
 
     const [status, setStatus] =  useState('')
     const submit = (e) => {
@@ -30,7 +30,7 @@ const SellerDetails = () => {
             toast.success(successMessage)
             dispatch(messageClear())  
         } 
-    },[successMessage])
+    },[successMessage,dispatch])
 
     useEffect(() => { 
         if (seller) { 
