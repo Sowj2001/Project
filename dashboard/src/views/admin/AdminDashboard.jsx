@@ -155,7 +155,7 @@ const AdminDashboard = () => {
             <div className='w-full bg-[#6a5fdf] p-4 rounded-md text-[#d0d2d6]'>
                 <div className='flex justify-between items-center'>
                     <h2 className='font-semibold text-lg text-[#d0d2d6] pb-3'>Recent Seller Message</h2>
-                    <Link className='font-semibold text-sm text-[#d0d2d6]'>View All</Link>
+                    {/* <Link to ="admin/dashboard/chat-sellers" className='font-semibold text-sm text-[#d0d2d6]'>View All</Link> */}
                 </div>
 
         <div className='flex flex-col gap-2 pt-6 text-[#d0d2d6]'>
@@ -196,7 +196,7 @@ const AdminDashboard = () => {
         <div className='w-full p-4 bg-[#6a5fdf] rounded-md mt-6'>
             <div className='flex justify-between items-center'>
                 <h2 className='font-semibold text-lg text-[#d0d2d6] pb-3 '>Recent Orders</h2>
-                <Link className='font-semibold text-sm text-[#d0d2d6]'>View All</Link>
+                {/* <Link to="/orders" className='font-semibold text-sm text-[#d0d2d6]'>View All</Link> */}
                </div>
 
     <div className='relative overflow-x-auto'>

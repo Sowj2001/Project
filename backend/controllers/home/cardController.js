@@ -1,47 +1,84 @@
 const cardModel = require("../../models/cardModel");
 const { responseReturn } = require("../../utiles/response");
+const productModel =require('../../models/productModel')
+
 const {
 	mongo: { ObjectId },
 } = require("mongoose");
 const wishlistModel = require("../../models/wishlistModel");
 
 class cardController {
-	add_to_card = async (req, res) => {
+	// add_to_card = async (req, res) => {
+	// 	const { userId, productId, quantity } = req.body;
+	// 	try {
+	// 		const product = await cardModel.findOne({
+	// 			$and: [
+	// 				{
+	// 					productId: {
+	// 						$eq: productId,
+	// 					},
+	// 				},
+	// 				{
+	// 					userId: {
+	// 						$eq: userId,
+	// 					},
+	// 				},
+	// 			],
+	// 		});
+
+	// 		if (product) {
+	// 			responseReturn(res, 404, { error: "Product Already Added To Card" });
+	// 		} else {
+	// 			const product = await cardModel.create({
+	// 				userId,
+	// 				productId,
+	// 				quantity,
+	// 			});
+	// 			responseReturn(res, 201, {
+	// 				message: "Added To Card Successfully",
+	// 				product,
+	// 			});
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error.message);
+	// 	}
+	// };
+	// End Method
+
+	 add_to_card = async (req, res) => {
 		const { userId, productId, quantity } = req.body;
 		try {
+			// Check the stock of the product
+			const productStock = await productModel.findById(productId, 'stock');
+			if (!productStock || productStock.stock <= 0) {
+				return responseReturn(res, 400, { error: "Product out of stock" });
+			}
+	
 			const product = await cardModel.findOne({
 				$and: [
-					{
-						productId: {
-							$eq: productId,
-						},
-					},
-					{
-						userId: {
-							$eq: userId,
-						},
-					},
+					{ productId: { $eq: productId } },
+					{ userId: { $eq: userId } },
 				],
 			});
-
+	
 			if (product) {
-				responseReturn(res, 404, { error: "Product Already Added To Card" });
+				return responseReturn(res, 404, { error: "Product Already Added To Cart" });
 			} else {
-				const product = await cardModel.create({
+				const newProduct = await cardModel.create({
 					userId,
 					productId,
 					quantity,
 				});
 				responseReturn(res, 201, {
-					message: "Added To Card Successfully",
-					product,
+					message: "Added To Cart Successfully",
+					product: newProduct,
 				});
 			}
 		} catch (error) {
 			console.log(error.message);
+			responseReturn(res, 500, { error: "Internal Server Error" });
 		}
 	};
-	// End Method
 
 	get_card_products = async (req, res) => {
 		const co = 5;
