@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import seller from '../../assets/seller.png'
 import { get_admin_dashboard_data } from '../../store/Reducers/dashboardReducer';
 import moment from 'moment';
+import { FaRupeeSign } from "react-icons/fa";
+
 
 const AdminDashboard = () => {
 
@@ -99,7 +101,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className='w-[40px] h-[47px] rounded-full bg-[#fa0305] flex justify-center items-center text-xl'>
-                    <MdCurrencyExchange className='text-[#fae8e8] shadow-lg' /> 
+                    <FaRupeeSign className='text-[#fae8e8] shadow-lg' /> 
                     </div> 
                 </div>
 
