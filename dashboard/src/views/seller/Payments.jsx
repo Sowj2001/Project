@@ -5,6 +5,8 @@ import { FixedSizeList as List } from 'react-window';
 import { get_seller_payment_details, messageClear, send_withdrowal_request } from '../../store/Reducers/PaymentReducer';
 import toast from 'react-hot-toast';
 import moment from 'moment';
+import { FaRupeeSign } from "react-icons/fa";
+
 
 function handleOnWheel({ deltaY }) {
     console.log('handleOnWheel',deltaY)
@@ -90,7 +92,7 @@ const Payments = () => {
                     </div>
 
                     <div className='w-[40px] h-[47px] rounded-full bg-[#fa0305] flex justify-center items-center text-xl'>
-                    <MdCurrencyExchange className='text-[#fae8e8] shadow-lg' /> 
+                    <FaRupeeSign className='text-[#fae8e8] shadow-lg' /> 
                     </div> 
                 </div>
 
@@ -102,7 +104,7 @@ const Payments = () => {
                     </div>
 
                     <div className='w-[40px] h-[47px] rounded-full bg-[#760077] flex justify-center items-center text-xl'>
-                    <MdCurrencyExchange  className='text-[#fae8e8] shadow-lg' /> 
+                    <FaRupeeSign  className='text-[#fae8e8] shadow-lg' /> 
                     </div> 
                 </div>
 
@@ -114,7 +116,7 @@ const Payments = () => {
                     </div>
 
                     <div className='w-[40px] h-[47px] rounded-full bg-[#038000] flex justify-center items-center text-xl'>
-                    <MdCurrencyExchange  className='text-[#fae8e8] shadow-lg' /> 
+                    <FaRupeeSign  className='text-[#fae8e8] shadow-lg' /> 
                     </div> 
                 </div>
 
@@ -126,7 +128,7 @@ const Payments = () => {
                     </div>
 
                     <div className='w-[40px] h-[47px] rounded-full bg-[#0200f8] flex justify-center items-center text-xl'>
-                    <MdCurrencyExchange  className='text-[#fae8e8] shadow-lg' /> 
+                    <FaRupeeSign  className='text-[#fae8e8] shadow-lg' /> 
                     </div> 
                 </div>
  

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { FaRupeeSign } from "react-icons/fa";
 import { MdCurrencyExchange,MdProductionQuantityLimits } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6"; 
@@ -96,10 +97,11 @@ const SellerDashboard = () => {
                     <div className='flex flex-col justify-start items-start text-[#5c5a5a]'>
                         <h2 className='text-3xl font-bold'>₹{totalSale}</h2>
                         <span className='text-md font-medium'>Total Salse</span>
+
                     </div>
 
                     <div className='w-[40px] h-[47px] rounded-full bg-[#fa0305] flex justify-center items-center text-xl'>
-                    <MdCurrencyExchange className='text-[#fae8e8] shadow-lg' /> 
+                    <FaRupeeSign className='text-[#fae8e8] shadow-lg' /> 
                     </div> 
                 </div>
 
@@ -155,7 +157,7 @@ const SellerDashboard = () => {
             <div className='w-full bg-[#6a5fdf] p-4 rounded-md text-[#d0d2d6]'>
                 <div className='flex justify-between items-center'>
                     <h2 className='font-semibold text-lg text-[#d0d2d6] pb-3'>Recent Customer Message</h2>
-                    <Link className='font-semibold text-sm text-[#d0d2d6]'>View All</Link>
+                    <Link to ="/seller/dashboard/chat-customer"className='font-semibold text-sm text-[#d0d2d6]'>View All</Link>
                 </div>
 
         <div className='flex flex-col gap-2 pt-6 text-[#d0d2d6]'>
@@ -195,7 +197,7 @@ const SellerDashboard = () => {
         <div className='w-full p-4 bg-[#6a5fdf] rounded-md mt-6'>
             <div className='flex justify-between items-center'>
                 <h2 className='font-semibold text-lg text-[#d0d2d6] pb-3 '>Recent Orders</h2>
-                <Link className='font-semibold text-sm text-[#d0d2d6]'>View All</Link>
+                <Link to="/seller/dashboard/orders" className='font-semibold text-sm text-[#d0d2d6]'>View All</Link>
                </div>
 
     <div className='relative overflow-x-auto'>

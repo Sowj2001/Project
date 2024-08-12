@@ -1,6 +1,7 @@
 
 const authOrderModel = require('../../models/authOrder')
 const customerOrder = require('../../models/customerOrder')
+const productModel =require('../../models/productModel')
 
 const myShopWallet = require('../../models/myShopWallet')
 const sellerWallet = require('../../models/sellerWallet')
@@ -372,6 +373,7 @@ class orderController{
                 year: splitTime[2]
              }) 
         }
+        await this.update_stock(orderId);
         responseReturn(res, 200, {message: 'success'}) 
         
     } catch (error) {
@@ -380,6 +382,24 @@ class orderController{
      
   }
    // End Method 
+
+
+   update_stock = async (orderId) => {
+    try {
+        const order = await customerOrder.findById(orderId)
+        if (!order) {
+            throw new Error("Order not found")
+        }
+        for (let product of order.products) {
+            await productModel.findByIdAndUpdate(product._id, {
+                $inc: { stock: -product.quantity }
+            })
+        }
+    } catch (error) {
+        console.log("Update stock error:", error.message)
+    }
+}
+// End Method
 
 }
 
