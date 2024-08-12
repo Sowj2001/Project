@@ -42,20 +42,24 @@ const Home = () => {
                         </div>
                     </div>
                     <div className='py-10'>
-                        <div className='w-[85%] flex flex-wrap mx-auto'>
-                            <div className='grid w-full grid-cols-3 md-lg:grid-cols-1 md:grid-cols-1 gap-7'>
-                                <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
-                                    <Products title='Latest Product' products={latest_product} />
-                                </div>
-                                <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
-                                    <Products title='Top Rated Product' products={topRated_product} />
-                                </div>
-                                <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
-                                    <Products title='Discount Product' products={discount_product} />
-                                </div>
-                            </div> 
-                        </div> 
-                    </div>
+    <div className='w-[85%] flex flex-wrap mx-auto'>
+        <div className='grid w-full grid-cols-3 md-lg:grid-cols-1 md:grid-cols-1 gap-7'>
+            <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
+                <h2 className="text-xl font-semibold mb-4 text-center">Latest Product</h2> {/* Title for Latest Product */}
+                <Products products={latest_product} />
+            </div>
+            <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
+                <h2 className="text-xl font-semibold mb-4 text-center">Top Rated Product</h2> {/* Title for Top Rated Product */}
+                <Products products={topRated_product} />
+            </div>
+            <div className='overflow-hidden bg-white p-4 rounded-lg shadow-lg'>
+                <h2 className="text-xl font-semibold mb-4 text-center">Discount Product</h2> {/* Title for Discount Product */}
+                <Products products={discount_product} />
+            </div>
+        </div> 
+    </div> 
+</div>
+
                 </div>
             </div>
             <Footer />
