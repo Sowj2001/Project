@@ -8,6 +8,13 @@ const Payment = () => {
 
     const { state: {price,items,orderId}} = useLocation()
     const [paymentMethod, setPaymentMethod] = useState('stripe')
+    const [orderPlaced, setOrderPlaced] = useState(false);
+
+    const handleBuyNow = () => {
+        setOrderPlaced(true);
+        // Here you can also dispatch an action or make an API call to place the order.
+    };
+
 
 
     return (
@@ -40,9 +47,27 @@ const Payment = () => {
             </div>
            }
         {
-            paymentMethod === 'cod' && <div className='w-full px-4 py-8 bg-white shadow-sm'>
-                <button className='px-10 py-[6px] rounded-sm hover:shadow-green-500/20 hover:shadow-lg bg-[#059473] text-white'>Pay Now</button>
-            </div>
+           <div>
+           {/* ...rest of your component code... */}
+           {
+               paymentMethod === 'cod' && 
+               <div className='w-full px-4 py-8 '>
+                   <button 
+                       className='px-10 py-[6px] rounded-sm hover:shadow-green-500/20 hover:shadow-lg bg-[#059473] text-white'
+                       onClick={handleBuyNow}
+                   >
+                       Buy Now
+                   </button>
+               </div>
+           }
+
+           {orderPlaced && (
+               <div className='w-full px-4 py-8 text-green-600'>
+                   Order placed!
+               </div>
+           )}
+           {/* ...rest of your component code... */}
+       </div>
         }
             
                 </div> 
