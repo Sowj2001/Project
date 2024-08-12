@@ -62,8 +62,8 @@ const Payment = () => {
            }
 
            {orderPlaced && (
-               <div className='w-full px-4 py-8 text-green-600'>
-                   Order placed!
+               <div className='w-full  px-4 py-8 text-green-600'>
+                   <h1>Order placed!</h1>
                </div>
            )}
            {/* ...rest of your component code... */}
