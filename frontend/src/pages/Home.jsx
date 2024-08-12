@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_products } from '../store/reducers/homeReducer';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-tailwind/react';
+
 
 const Home = () => {
     const dispatch = useDispatch();
