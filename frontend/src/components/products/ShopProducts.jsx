@@ -41,7 +41,7 @@ const ShopProducts = ({ styles, products }) => {
 			toast.error(errorMessage);
 			dispatch(messageClear());
 		}
-	}, [successMessage, errorMessage]);
+	}, [successMessage, errorMessage,dispatch]);
 
 	const add_wishlist = (pro) => {
 		dispatch(

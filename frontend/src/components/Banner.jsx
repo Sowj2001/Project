@@ -47,7 +47,7 @@ const Banner = () => {
                     >
                         {banners.length > 0 && banners.map((banner, index) => (
                             <Link key={index} to={`product/details/${banner.link}`}>
-                                <div className="mt-5 h-72 md:h-96 lg:h-150 relative overflow-hidden">
+                                <div className="mt-5 h-80 md:h-96 lg:h-150 relative overflow-hidden">
                                     <img
                                         src={banner.banner}
                                         alt=""

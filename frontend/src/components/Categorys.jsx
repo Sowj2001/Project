@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 const Categorys = () => {
 	const { categorys } = useSelector((state) => state.home);
@@ -41,9 +41,9 @@ const Categorys = () => {
 	return (
 		<div className='w-[87%] mx-auto relative'>
 			<div className='w-full'>
-				<div className='text-center flex justify-center items-center flex-col text-3xl text-slate-600 font-bold relative pb-[35px]'>
+				<div className='mt-4 text-center flex justify-center items-center flex-col text-3xl text-slate-600 font-bold relative pb-[35px]'>
 					<h2>Top Category </h2>
-					<div className='w-[100px] h-[2px] bg-[#059473] mt-4'></div>
+					<div className=' w-[100px] h-[2px] bg-[#059473] mt-4'></div>
 				</div>
 			</div>
 
