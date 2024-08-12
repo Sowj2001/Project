@@ -118,7 +118,9 @@ class orderController{
         try {
             const recentOrders = await customerOrder.find({
                 customerId: new ObjectId(userId) 
-            }).limit(5)
+            })
+            .sort({ createdAt: -1 })
+            .limit(5)
             const pendingOrder = await customerOrder.find({
                 customerId: new ObjectId(userId),delivery_status: 'pending'
              }).countDocuments()
@@ -183,16 +185,61 @@ class orderController{
  }
  // End Method 
 
- get_admin_orders = async(req, res) => {
-    let {page,searchValue,parPage} = req.query
-    page = parseInt(page)
-    parPage= parseInt(parPage)
+//  get_admin_orders = async(req, res) => {
+//     let {page,searchValue,parPage} = req.query
+//     page = parseInt(page)
+//     parPage= parseInt(parPage)
 
-    const skipPage = parPage * (page - 1)
+//     const skipPage = parPage * (page - 1)
+
+//     try {
+//         if (searchValue) {
+            
+//         } else {
+//             const orders = await customerOrder.aggregate([
+//                 {
+//                     $lookup: {
+//                         from: 'authororders',
+//                         localField: "_id",
+//                         foreignField: 'orderId',
+//                         as: 'suborder'
+//                     }
+//                 }
+//             ]).skip(skipPage).limit(parPage).sort({ createdAt: -1})
+
+//             const totalOrder = await customerOrder.aggregate([
+//                 {
+//                     $lookup: {
+//                         from: 'authororders',
+//                         localField: "_id",
+//                         foreignField: 'orderId',
+//                         as: 'suborder'
+//                     }
+//                 }
+//             ])
+
+//             responseReturn(res,200, { orders, totalOrder: totalOrder.length })
+//         }
+//     } catch (error) {
+//         console.log(error.message)
+//     } 
+
+//  }
+
+
+
+
+
+get_admin_orders = async(req, res) => {
+    let { page, searchValue, parPage } = req.query;
+    page = parseInt(page);
+    parPage = parseInt(parPage);
+
+    const skipPage = parPage * (page - 1);
 
     try {
         if (searchValue) {
-            
+            // Include logic for handling searchValue if needed
         } else {
             const orders = await customerOrder.aggregate([
                 {
@@ -202,8 +249,17 @@ class orderController{
                         foreignField: 'orderId',
                         as: 'suborder'
                     }
+                },
+                {
+                    $sort: { createdAt: -1 } // Sorts by createdAt in descending order
+                },
+                {
+                    $skip: skipPage
+                },
+                {
+                    $limit: parPage
                 }
-            ]).skip(skipPage).limit(parPage).sort({ createdAt: -1})
+            ]);
 
             const totalOrder = await customerOrder.aggregate([
                 {
@@ -214,15 +270,15 @@ class orderController{
                         as: 'suborder'
                     }
                 }
-            ])
+            ]);
 
-            responseReturn(res,200, { orders, totalOrder: totalOrder.length })
+            responseReturn(res, 200, { orders, totalOrder: totalOrder.length });
         }
     } catch (error) {
-        console.log(error.message)
-    } 
+        console.log(error.message);
+    }
+}
 
- }
   // End Method 
   
   get_admin_order = async (req, res) => {

@@ -30,7 +30,7 @@ class dashboardController{
          const totalOrder = await customerOrder.find({}).countDocuments()
          const totalSeller = await sellerModel.find({}).countDocuments()
          const messages = await adminSellerMessage.find({}).limit(3)
-         const recentOrders = await customerOrder.find({}).limit(5)
+         const recentOrders = await customerOrder.find({}).limit(5).sort({ createdAt: -1 })
          responseReturn(res, 200, {
             totalProduct,
             totalOrder,
@@ -99,11 +99,16 @@ class dashboardController{
                     }
                 }
             ]
-        }).limit(3)   
+        })
+        .sort({ createdAt: -1 })
+        .limit(3)  
+
 
         const recentOrders = await authOrder.find({
             sellerId: new ObjectId(id)
-        }).limit(5)
+        })
+        .sort({ createdAt: -1 })
+        .limit(5)
 
         responseReturn(res, 200, {
             totalProduct,
