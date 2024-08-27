@@ -41,7 +41,7 @@ const ContactUs = () => {
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Our Address</h3>
                                 <p className="text-lg text-gray-600">
-                                    Udupi, Karnataka 574116
+                                    Udupi, Karnataka 574102
                                 </p>
                             </div>
                         </div>
@@ -55,7 +55,7 @@ const ContactUs = () => {
                                 </div>
                                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Phone Number</h3>
                                 <p className="text-lg text-gray-600">
-                                    7019115360
+                                +91 897546123
                                 </p>
                             </div>
                         </div>

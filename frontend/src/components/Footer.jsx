@@ -14,8 +14,8 @@ const Footer = () => {
                     <div className='flex flex-col items-center md:items-start mb-4 md:mb-0'>
                         <img className='w-48 h-16 mb-4' src="http://localhost:3000/images/logo.png" alt="logo" />
                         <ul className='text-sm text-gray-200'>
-                            <li className='mb-1'>Address: Udupi, Karnataka 574116</li>
-                            <li className='mb-1'>Phone: 7019115360</li>
+                            <li className='mb-1'>Address: Udupi, Karnataka 574102</li>
+                            <li className='mb-1'>Phone: +91 897546123</li>
                             <li>Email: bizcart4all@gmail.com</li>
                         </ul>
                     </div>

@@ -56,10 +56,7 @@ const Header = () => {
                                 <span>bizcart4all@gmail.com</span>
                             </li>
 
-                            <li className='flex relative justify-center items-center gap-2 text-sm'>
-                                <span><IoMdPhonePortrait /></span>
-                                <span>+(91) 7019115360</span>
-                            </li>
+                            
                         </ul>
 
                         <div className='flex justify-center items-center gap-10'>

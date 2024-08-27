@@ -39,7 +39,7 @@ const AboutUs = () => {
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-extrabold text-gray-800 mb-8 animate-slideUp">About Us</h2>
                     <p className="text-lg text-gray-700 leading-relaxed animate-slideUp delay-200">
-                        At BizCart4All, we are passionate about connecting buyers and sellers from around the globe. Our multi-vendor e-commerce platform is designed to provide a seamless and enjoyable shopping experience while empowering vendors to reach a global audience with ease.
+                        At "BizCart4All", we are passionate about connecting buyers and sellers . Our multi-vendor e-commerce platform is designed to provide a seamless and enjoyable shopping experience while empowering vendors to reach the audience with ease.
                     </p>
                 </div>
             </div>
