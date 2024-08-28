@@ -277,9 +277,9 @@ const Card = () => {
                                                             }
                                                             <img className='sm:w-full w-full h-[240px]' src={pt.productInfo.images[0]} alt="" />
                                                             <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
-                                                                <li onClick={() => dispatch(delete_card_product(pt._id))} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
+                                                                {/* <li onClick={() => dispatch(delete_card_product(pt._id))} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
                                                                     <FaRegHeart />
-                                                                </li>
+                                                                </li> */}
                                                                 <Link to={`/product/details/${pt.productInfo.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
                                                                     <FaEye />
                                                                 </Link>
