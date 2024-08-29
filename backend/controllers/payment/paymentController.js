@@ -1,4 +1,3 @@
-
 const sellerModel = require('../../models/sellerModel')
 const stripeModel = require('../../models/stripeModel')
 
@@ -176,6 +175,7 @@ class paymentController{
   get_payment_request = async (req, res) => {
     try {
         const withdrowalRequest = await withdrowRequest.find({ status: 'pending'})
+        .sort({ createdAt: -1 })
         responseReturn(res, 200, {withdrowalRequest })
     } catch (error) {
         responseReturn(res, 500,{ message: 'Internal Server Error'})
@@ -183,27 +183,83 @@ class paymentController{
   }
     // End Method 
 
-    payment_request_confirm = async (req, res) => {
-        const {paymentId} = req.body 
-        try {
-            const payment = await withdrowRequest.findById(paymentId)
-            const {stripeId} = await stripeModel.findOne({
-                sellerId: new ObjectId(payment.sellerId)
-            })
+    // payment_request_confirm = async (req, res) => {
+    //     const {paymentId} = req.body 
+    //     try {
+    //         const payment = await withdrowRequest.findById(paymentId)
+    //         const {stripeId} = await stripeModel.findOne({
+    //             sellerId: new ObjectId(payment.sellerId)
+    //         })
 
-            await stripe.transfers.create({
-                amount: payment.amount * 100,
-                currency: 'inr',
-                destination: stripeId
-            })
+    //         await stripe.transfers.create({
+    //             amount: payment.amount * 100,
+    //             currency: 'inr',
+    //             destination: stripeId
+    //         })
              
-            await withdrowRequest.findByIdAndUpdate(paymentId, {status: 'success'})
-            responseReturn(res, 200, {payment, message: 'Request Confirm Success'})
+    //         await withdrowRequest.findByIdAndUpdate(paymentId, {status: 'success'})
+    //         responseReturn(res, 200, {payment, message: 'Request Confirm Success'})
 
-        } catch (error) {   
-            responseReturn(res, 500,{ message: 'Internal Server Error'})
+    //     } catch (error) {   
+    //         responseReturn(res, 500,{ message: 'Internal Server Error'})
+    //     }
+    // }
+
+
+    
+
+payment_request_confirm = async (req, res) => {
+    const { paymentId } = req.body;
+
+    try {
+        // Find the payment request by ID
+        const payment = await withdrowRequest.findById(paymentId);
+        if (!payment) {
+            return responseReturn(res, 404, { message: 'Payment request not found' });
         }
+
+        // Log the found payment
+        console.log('Payment found:', payment);
+
+        // Find the seller's Stripe account
+        const stripeModelData = await stripeModel.findOne({
+            sellerId: new ObjectId(payment.sellerId)
+        });
+
+        if (!stripeModelData) {
+            return responseReturn(res, 404, { message: 'Stripe account not found' });
+        }
+
+        const { stripeId } = stripeModelData;
+
+        // Log the found Stripe account
+        console.log('Stripe account found:', stripeModelData);
+
+        // Create a transfer to the seller's Stripe account
+        const transfer = await stripe.transfers.create({
+            amount: payment.amount * 100, // Stripe expects the amount in the smallest currency unit (e.g., paise)
+            currency: 'inr',
+            destination: stripeId
+        });
+
+        // Log the successful transfer
+        console.log('Stripe transfer successful:', transfer);
+
+        // Update the payment request status to 'success'
+        await withdrowRequest.findByIdAndUpdate(paymentId, { status: 'success' });
+
+        // Return a success response
+        return responseReturn(res, 200, { payment, message: 'Request Confirm Success' });
+
+    } catch (error) {
+        // Log the full error for debugging purposes
+        console.error('Error in payment_request_confirm:', error);
+
+        // Return an error response
+        return responseReturn(res, 500, { message: 'Internal Server Error' });
     }
+};
+
   // End Method 
 
 }
