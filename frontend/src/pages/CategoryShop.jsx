@@ -70,8 +70,7 @@ const CategoryShop = () => {
 		category,
 		rating,
 		sortPrice,
-		pageNumber,
-	]);
+		pageNumber]);
 
 	const resetRating = () => {
 		setRating("");
