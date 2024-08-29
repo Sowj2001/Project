@@ -18,6 +18,8 @@ const Wishlist = () => {
     useEffect(() => {
         dispatch(get_wishlist_products(userInfo.id))
     },[])
+
+    
     const add_card = (id) => {
 		if (userInfo) {
 			dispatch(
@@ -66,12 +68,7 @@ const Wishlist = () => {
                 <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
                 <FaEye />
                 </Link>
-                <li
-								onClick={() => add_card(p._id)}
-								className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'
-							>
-								<RiShoppingCartLine />
-							</li>
+               
             </ul>    
                 </div>
     

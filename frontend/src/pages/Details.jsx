@@ -47,10 +47,9 @@ const Details = () => {
         
     },[successMessage,errorMessage])
 
-    const images = [1,2,3,4,5,6]
+    
     const [image, setImage] = useState('')
-    const discount = 10
-    const stock = 3
+   
     const [state, setState] = useState('reviews')
 
     const responsive = {
